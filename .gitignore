@@ -27,3 +27,12 @@
 *.exe
 *.out
 *.app
+
+
+*.sdf
+*.opensdf
+Debug/
+ipch/
+Release/
+ffplaymfc/Debug/
+ffplaymfc/Release/

@@ -33,7 +33,11 @@ int CDisplay::Init()
 int CDisplay::Release()
 {
 	if (_img_convert_ctx)
+	{
 		sws_freeContext(_img_convert_ctx);
+		_img_convert_ctx = NULL;
+	}
+		
 	return 1;
 }
 
@@ -136,15 +140,17 @@ int CDisplay::UpdateTexture(HTexture hTexture, AVPixelFormat format, unsigned ch
 	sws_scale(_img_convert_ctx, (const unsigned char* const*)data, linesize, 0, pTextureYUV->h, pTextureYUV->pFrameYUV->data, pTextureYUV->pFrameYUV->linesize);
 
 	SDL_UpdateTexture(pTextureYUV->pSDLTexture, NULL, pTextureYUV->pFrameYUV->data[0], pTextureYUV->pFrameYUV->linesize[0]);
-	SDL_RenderClear(_sdlRenderer);
-	//SDL_RenderCopy( sdlRenderer, sdlTexture, &sdlRect, &sdlRect );  
-	SDL_RenderCopy(_sdlRenderer, pTextureYUV->pSDLTexture, NULL, NULL);
-
+	
 	return 1;
 }
 
 int CDisplay::DisplayTexture(HTexture hTexture, SDL_Rect rect)
 {
+	TextureYUV *pTextureYUV = (TextureYUV *)hTexture;
+
+	SDL_RenderClear(_sdlRenderer);
+	//SDL_RenderCopy( sdlRenderer, sdlTexture, &sdlRect, &sdlRect );  
+	SDL_RenderCopy(_sdlRenderer, pTextureYUV->pSDLTexture, NULL, NULL);
 	SDL_RenderPresent(_sdlRenderer);
 
 	return 1;

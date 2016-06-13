@@ -1527,7 +1527,10 @@ static void alloc_picture(VideoState *is)
 	vp = &is->pictq[is->pictq_windex];
 
 	if (vp->bmp)
+	{
 		g_disp.DestroyTexture(vp->bmp);
+		vp->bmp = NULL;
+	}
 
 	video_open(is, 0);
 	vp->bmp = g_disp.CreateTexture(vp->width, vp->height);
