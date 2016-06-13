@@ -143,6 +143,9 @@
   <ItemGroup>
     <ResourceCompile Include="ffplaymfc.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\版本日志.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

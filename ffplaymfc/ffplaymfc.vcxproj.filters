@@ -107,4 +107,7 @@
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\版本日志.txt" />
+  </ItemGroup>
 </Project>

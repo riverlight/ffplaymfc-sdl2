@@ -24,8 +24,6 @@ extern "C"
 }
 
 
-#define USE_SDL1 0
-
 typedef void* HDisplayWindow;
 typedef void* HTexture;
 
@@ -56,17 +54,11 @@ protected:
 
 private:
 
-#if USE_SDL1
-	SDL_Surface *_screen;
-	int _nWidth, _nHeight;
-	int _bFullScreen;
-#else
 	SDL_Window *_screen;
 	int _nWidth, _nHeight;
 	int _bFullScreen;
 
 	SDL_Renderer* _sdlRenderer;
-#endif
 
 	struct SwsContext *_img_convert_ctx;
 };
