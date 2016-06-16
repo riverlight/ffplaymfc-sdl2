@@ -18,6 +18,7 @@
 #include "VideodecodeDlg.h"
 #include "AudiodecodeDlg.h"
 #include "SysinfoDlg.h"
+#include "afxwin.h"
 
 // CffplaymfcDlg 对话框
 class CffplaymfcDlg : public CDialogEx
@@ -25,6 +26,7 @@ class CffplaymfcDlg : public CDialogEx
 // 构造
 public:
 	CffplaymfcDlg(CWnd* pParent = NULL);	// 标准构造函数
+	virtual ~CffplaymfcDlg();
 
 // 对话框数据
 	enum { IDD = IDD_FFPLAYMFC_DIALOG };
@@ -118,4 +120,5 @@ public:
 
 	afx_msg void OnWindowstretchKeepratio();
 	afx_msg void OnWindowstretchResize();
+	CStatic _displayWnd;
 };

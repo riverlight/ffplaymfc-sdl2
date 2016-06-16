@@ -1174,7 +1174,8 @@ static int video_open(VideoState *is, int force_set_video_mode)
 		h = 480;
 	}
 
-	g_disp.CreateDisplayWindow(w, h, is_full_screen);
+	//g_disp.CreateDisplayWindow(w, h, is_full_screen);
+	g_disp.CreateDisplayWindowFrom(&dlg->_displayWnd);
 	g_disp.GetWindowSize(&is->width, &is->height);
 
 	return 0;
@@ -3164,7 +3165,8 @@ do_seek:
 			screen_width  = cur_stream->width  = event.window.data1;
 			screen_height = cur_stream->height = event.window.data2;
 			//Ë¢ÐÂ--------------------
-			g_disp.CreateDisplayWindow(event.window.data1, event.window.data1, 0);
+			//g_disp.CreateDisplayWindow(event.window.data1, event.window.data1, 0);
+			g_disp.CreateDisplayWindowFrom(&dlg->_displayWnd);
 			g_disp.FillWindow(cur_stream->xleft, cur_stream->ytop, cur_stream->width, cur_stream->height, 0x00, 0x00, 0x00);
 			g_disp.UpdateRect(cur_stream->xleft, cur_stream->ytop, cur_stream->width, cur_stream->height);
 			//--

@@ -32,8 +32,6 @@ class CffplaymfcApp : public CWinApp
 public:
 	CffplaymfcApp();
 
-	void LoadLaguage();
-
 // ÖØÐ´
 public:
 	virtual BOOL InitInstance();

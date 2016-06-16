@@ -39,6 +39,7 @@ public:
 	void GetScreenSize(int *pnWidth, int *pnHeight);
 
 	HDisplayWindow CreateDisplayWindow(int nWidth, int nHeight, int bFullScreen);
+	HDisplayWindow CreateDisplayWindowFrom(void *hWnd);
 	int DestroyDisplayWindow();
 	void GetWindowSize(int *pnWidth, int *pnHeight);
 	int FillWindow(int x, int y, int w, int h, int color);

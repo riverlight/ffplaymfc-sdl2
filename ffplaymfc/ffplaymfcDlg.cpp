@@ -78,12 +78,15 @@ END_MESSAGE_MAP()
 // CffplaymfcDlg 对话框
 
 
-
-
 CffplaymfcDlg::CffplaymfcDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CffplaymfcDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+}
+
+CffplaymfcDlg::~CffplaymfcDlg()
+{
+
 }
 
 void CffplaymfcDlg::DoDataExchange(CDataExchange* pDX)
@@ -107,6 +110,7 @@ void CffplaymfcDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CODECV_RESOLUTION, m_codecvresolution);
 	DDX_Control(pDX, IDC_PLAY_PROGRESS, m_playprogress);
 	DDX_Control(pDX, IDC_INPUTURL, m_inputurl);
+	DDX_Control(pDX, IDC_LOGO, _displayWnd);
 }
 
 BEGIN_MESSAGE_MAP(CffplaymfcDlg, CDialogEx)
@@ -211,7 +215,7 @@ BOOL CffplaymfcDlg::OnInitDialog()
 		OnBnClickedStart();
 	}
 	m_inputurl.SetWindowTextW(TEXT("rtmp://live.videojj.com/app-name/leon123"));
-
+	
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

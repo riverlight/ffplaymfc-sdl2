@@ -65,6 +65,27 @@ HDisplayWindow CDisplay::CreateDisplayWindow(int nWidth, int nHeight, int bFullS
 	return screen;
 }
 
+HDisplayWindow CDisplay::CreateDisplayWindowFrom(void *hWnd)
+{
+	if (_screen != NULL)
+		return _screen;
+
+	CStatic *pDlgDisplay = (CStatic *)hWnd;
+
+	SDL_Window *screen = SDL_CreateWindowFrom(pDlgDisplay->m_hWnd);
+	_sdlRenderer = SDL_CreateRenderer(screen, -1, 0);
+
+	CRect rect;
+	pDlgDisplay->GetClientRect(&rect);
+
+	_screen = screen;
+	_nWidth = rect.right - rect.left;
+	_nHeight = rect.bottom - rect.top;
+	_bFullScreen = 0;
+
+	return screen;
+}
+
 int CDisplay::DestroyDisplayWindow()
 {
 	if (_sdlRenderer != NULL)
@@ -114,7 +135,7 @@ HTexture CDisplay::CreateTexture(int w, int h)
 	pTextureYUV->h = h;
 
 	pTextureYUV->pFrameYUV = av_frame_alloc();
-	pTextureYUV->out_buffer = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, _nWidth, _nHeight, 1));
+	pTextureYUV->out_buffer = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, w, h, 1));
 	av_image_fill_arrays(pTextureYUV->pFrameYUV->data, pTextureYUV->pFrameYUV->linesize, pTextureYUV->out_buffer, AV_PIX_FMT_YUV420P, pTextureYUV->w, pTextureYUV->h, 1);
 
 	return pTextureYUV;
