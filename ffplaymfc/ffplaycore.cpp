@@ -1109,7 +1109,8 @@ static void do_exit(VideoState *is)
 	SDL_Quit();
 	g_disp.DestroyDisplayWindow();
 	g_disp.Release();
-	dlg->_displayWnd.ShowWindow(1);
+	if (dlg!=NULL)
+		dlg->_displayWnd.ShowWindow(1);
 	av_log(NULL, AV_LOG_QUIET, "%s", "");
 
 	//不能直接使用exit(0)，否则整个程序会退出

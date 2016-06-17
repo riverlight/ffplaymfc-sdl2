@@ -25,56 +25,6 @@
 #define new DEBUG_NEW
 #endif
 
-
-// 用于应用程序“关于”菜单项的 CAboutDlg 对话框
-
-class CAboutDlg : public CDialogEx
-{
-public:
-	CAboutDlg();
-
-// 对话框数据
-	enum { IDD = IDD_ABOUTBOX };
-
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
-	virtual BOOL OnInitDialog();
-// 实现
-protected:
-	DECLARE_MESSAGE_MAP()
-public:
-	CEdit m_editconfig;
-};
-
-CAboutDlg::CAboutDlg() : CDialogEx(CAboutDlg::IDD)
-{
-
-}
-
-BOOL CAboutDlg::OnInitDialog()
-{
-	CDialogEx::OnInitDialog();
-	CString configinfo;
-#ifdef _UNICODE
-	USES_CONVERSION;
-	configinfo.Format(_T("%s"),A2W(avformat_configuration()));
-#else
-	configinfo.Format(_T("%s"),avformat_configuration());
-#endif
-	m_editconfig.SetWindowText(configinfo);
-	return TRUE;
-}
-
-void CAboutDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_EDIT_CONFIG, m_editconfig);
-}
-
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-END_MESSAGE_MAP()
-
-
 // CffplaymfcDlg 对话框
 
 
@@ -149,8 +99,6 @@ BEGIN_MESSAGE_MAP(CffplaymfcDlg, CDialogEx)
 	ON_COMMAND(ID_ASPECT_16_9, &CffplaymfcDlg::OnAspect169)
 	ON_COMMAND(ID_ASPECT_16_10, &CffplaymfcDlg::OnAspect1610)
 	ON_COMMAND(ID_ASPECT_235_100, &CffplaymfcDlg::OnAspect235100)
-	ON_COMMAND(ID_LANG_CN, &CffplaymfcDlg::OnLangCn)
-	ON_COMMAND(ID_LANG_EN, &CffplaymfcDlg::OnLangEn)
 	ON_WM_HSCROLL()
 	ON_COMMAND(ID_WEBSITE, &CffplaymfcDlg::OnWebsite)
 	ON_COMMAND(IDCANCEL, &CffplaymfcDlg::OnIdcancel)
@@ -223,8 +171,7 @@ void CffplaymfcDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
-		CAboutDlg dlgAbout;
-		dlgAbout.DoModal();
+
 	}
 	else
 	{
@@ -426,8 +373,7 @@ void CffplaymfcDlg::OnDropFiles(HDROP hDropInfo)
 
 void CffplaymfcDlg::OnAbout()
 {
-	CAboutDlg dlg;
-	dlg.DoModal();
+
 }
 
 
@@ -548,62 +494,6 @@ void CffplaymfcDlg::OnAspect1610()
 void CffplaymfcDlg::OnAspect235100()
 {
 	ffmfc_aspectratio(235,100);
-}
-
-
-void CffplaymfcDlg::OnLangCn()
-{
-	//配置文件路径
-	char conf_path[300]={0};
-	//获得exe绝对路径
-	GetModuleFileNameA(NULL,(LPSTR)conf_path,300);//
-	//获得exe文家夹路径
-	strrchr( conf_path, '\\')[0]= '\0';//
-	//_getcwd(realpath,MYSQL_S_LENGTH);
-	printf("%s",conf_path);
-	strcat(conf_path,"\\configure.ini");
-	//写入配置文件
-	WritePrivateProfileStringA("Settings","language","Chinese",conf_path);
-
-	//重启软件
-	char exe_path[300]={0};
-	//获得exe绝对路径
-	GetModuleFileNameA(NULL,(LPSTR)exe_path,300);
-	ShellExecuteA( NULL,"open",exe_path,NULL,NULL,SW_SHOWNORMAL);
-
-	//先点一下暂停
-	OnBnClickedStop();
-	//释放子窗口
-	FreeSubWindow();
-	CDialogEx::OnCancel();
-}
-
-
-void CffplaymfcDlg::OnLangEn()
-{
-	//配置文件路径
-	char conf_path[300]={0};
-	//获得exe绝对路径
-	GetModuleFileNameA(NULL,(LPSTR)conf_path,300);//
-	//获得exe文家夹路径
-	strrchr( conf_path, '\\')[0]= '\0';//
-	//_getcwd(realpath,MYSQL_S_LENGTH);
-	printf("%s",conf_path);
-	strcat(conf_path,"\\configure.ini");
-	//写入配置文件
-	WritePrivateProfileStringA("Settings","language","English",conf_path);
-
-	//重启软件
-	char exe_path[300]={0};
-	//获得exe绝对路径
-	GetModuleFileNameA(NULL,(LPSTR)exe_path,300);
-	ShellExecuteA( NULL,"open",exe_path,NULL,NULL,SW_SHOWNORMAL);
-
-	//先点一下暂停
-	OnBnClickedStop();
-	//释放子窗口
-	FreeSubWindow();
-	CDialogEx::OnCancel();
 }
 
 

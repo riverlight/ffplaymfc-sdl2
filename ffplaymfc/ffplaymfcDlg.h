@@ -111,8 +111,6 @@ public:
 	afx_msg void OnAspect169();
 	afx_msg void OnAspect1610();
 	afx_msg void OnAspect235100();
-	afx_msg void OnLangCn();
-	afx_msg void OnLangEn();
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnWebsite();
 	afx_msg void OnIdcancel();
