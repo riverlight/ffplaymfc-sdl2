@@ -223,9 +223,6 @@ typedef struct VideoState {
 	int pictq_size, pictq_rindex, pictq_windex;
 	SDL_mutex *pictq_mutex;
 	SDL_cond *pictq_cond;
-#if !CONFIG_AVFILTER
-	struct SwsContext *img_convert_ctx;
-#endif
 
 	char filename[1024];
 	int width, height, xleft, ytop;
@@ -1083,13 +1080,8 @@ static void stream_close(VideoState *is)
 	SDL_DestroyMutex(is->subpq_mutex);
 	SDL_DestroyCond(is->subpq_cond);
 	SDL_DestroyCond(is->continue_read_thread);
-#if !CONFIG_AVFILTER
-	if (is->img_convert_ctx)
-		sws_freeContext(is->img_convert_ctx);
-#endif
 	av_free(is);
 
-	g_disp.Release();
 }
 
 //退出
@@ -1114,8 +1106,10 @@ static void do_exit(VideoState *is)
 	if (show_status)
 		printf("\n");
 
-	g_disp.DestroyDisplayWindow();
 	SDL_Quit();
+	g_disp.DestroyDisplayWindow();
+	g_disp.Release();
+	dlg->_displayWnd.ShowWindow(1);
 	av_log(NULL, AV_LOG_QUIET, "%s", "");
 
 	//不能直接使用exit(0)，否则整个程序会退出
@@ -1174,8 +1168,6 @@ static int video_open(VideoState *is, int force_set_video_mode)
 		h = 480;
 	}
 
-	//g_disp.CreateDisplayWindow(w, h, is_full_screen);
-	g_disp.CreateDisplayWindowFrom(&dlg->_displayWnd);
 	g_disp.GetWindowSize(&is->width, &is->height);
 
 	return 0;
@@ -3475,6 +3467,7 @@ int ffmfc_play(LPVOID lpParam)
 	//autoexit=1;
 
 	g_disp.Init();
+	g_disp.CreateDisplayWindowFrom(&dlg->_displayWnd);
 	g_disp.GetScreenSize(&fs_screen_width, &fs_screen_height);
 
 //	SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);

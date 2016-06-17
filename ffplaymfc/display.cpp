@@ -26,7 +26,11 @@ int CDisplay::Init()
 		TRACE("Could not initialize SDL - %s\n", SDL_GetError());
 		return 0;
 	}
+
+	_img_convert_ctx = sws_alloc_context();
 	
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
+
 	return 1;
 }
 
@@ -37,6 +41,7 @@ int CDisplay::Release()
 		sws_freeContext(_img_convert_ctx);
 		_img_convert_ctx = NULL;
 	}
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
 		
 	return 1;
 }
@@ -62,6 +67,8 @@ HDisplayWindow CDisplay::CreateDisplayWindow(int nWidth, int nHeight, int bFullS
 	_nHeight = nHeight;
 	_bFullScreen = bFullScreen;
 
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
+
 	return screen;
 }
 
@@ -83,6 +90,8 @@ HDisplayWindow CDisplay::CreateDisplayWindowFrom(void *hWnd)
 	_nHeight = rect.bottom - rect.top;
 	_bFullScreen = 0;
 
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
+
 	return screen;
 }
 
@@ -99,6 +108,8 @@ int CDisplay::DestroyDisplayWindow()
 		SDL_DestroyWindow(_screen);
 		_screen = NULL;
 	}
+
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
 
 	return 1;
 }
@@ -138,16 +149,23 @@ HTexture CDisplay::CreateTexture(int w, int h)
 	pTextureYUV->out_buffer = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, w, h, 1));
 	av_image_fill_arrays(pTextureYUV->pFrameYUV->data, pTextureYUV->pFrameYUV->linesize, pTextureYUV->out_buffer, AV_PIX_FMT_YUV420P, pTextureYUV->w, pTextureYUV->h, 1);
 
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
+
 	return pTextureYUV;
 }
 
 int CDisplay::DestroyTexture(HTexture hTexture)
 {
 	TextureYUV *pTextureYUV = (TextureYUV *)hTexture;
-
+	
+	av_frame_free(&pTextureYUV->pFrameYUV);
+	av_free(pTextureYUV->out_buffer);
+	
 	SDL_DestroyTexture(pTextureYUV->pSDLTexture);
 	delete pTextureYUV;
 	pTextureYUV = NULL;
+
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
 
 	return 1;
 }
@@ -160,7 +178,9 @@ int CDisplay::UpdateTexture(HTexture hTexture, AVPixelFormat format, unsigned ch
 		pTextureYUV->w, pTextureYUV->h, format, pTextureYUV->w, pTextureYUV->h, AV_PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
 	sws_scale(_img_convert_ctx, (const unsigned char* const*)data, linesize, 0, pTextureYUV->h, pTextureYUV->pFrameYUV->data, pTextureYUV->pFrameYUV->linesize);
 
-	SDL_UpdateTexture(pTextureYUV->pSDLTexture, NULL, pTextureYUV->pFrameYUV->data[0], pTextureYUV->pFrameYUV->linesize[0]);
+	int ret = SDL_UpdateTexture(pTextureYUV->pSDLTexture, NULL, pTextureYUV->pFrameYUV->data[0], pTextureYUV->pFrameYUV->linesize[0]);
+
+	TRACE("%s %d [ret=%d]\n", __FUNCTION__, __LINE__, ret);
 	
 	return 1;
 }
@@ -173,6 +193,8 @@ int CDisplay::DisplayTexture(HTexture hTexture, SDL_Rect rect)
 	//SDL_RenderCopy( sdlRenderer, sdlTexture, &sdlRect, &sdlRect );  
 	SDL_RenderCopy(_sdlRenderer, pTextureYUV->pSDLTexture, NULL, NULL);
 	SDL_RenderPresent(_sdlRenderer);
+
+	TRACE("%s %d\n", __FUNCTION__, __LINE__);
 
 	return 1;
 }

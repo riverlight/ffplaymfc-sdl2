@@ -86,7 +86,7 @@ CffplaymfcDlg::CffplaymfcDlg(CWnd* pParent /*=NULL*/)
 
 CffplaymfcDlg::~CffplaymfcDlg()
 {
-
+	
 }
 
 void CffplaymfcDlg::DoDataExchange(CDataExchange* pDX)
@@ -215,7 +215,7 @@ BOOL CffplaymfcDlg::OnInitDialog()
 		OnBnClickedStart();
 	}
 	m_inputurl.SetWindowTextW(TEXT("rtmp://live.videojj.com/app-name/leon123"));
-	
+		
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
