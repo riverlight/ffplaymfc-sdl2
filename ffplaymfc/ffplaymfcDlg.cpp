@@ -42,22 +42,10 @@ CffplaymfcDlg::~CffplaymfcDlg()
 void CffplaymfcDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_CODECA_CHANNELS, m_codecachannels);
-	DDX_Control(pDX, IDC_CODECA_NAME, m_codecaname);
-	DDX_Control(pDX, IDC_CODECA_SAMPLERATE, m_codecasamplerate);
 	//  DDX_Control(pDX, IDC_CODECV_FRAMERATE, m_codecvframerate);
-	DDX_Control(pDX, IDC_CODECV_NAME, m_codecvname);
-	DDX_Control(pDX, IDC_CODECV_FRAMERATE, m_codecvframerate);
-	DDX_Control(pDX, IDC_CODECV_PIXFMT, m_codecvpixfmt);
 	//  DDX_Text(pDX, IDC_CODECV_SIZE, m_codecvsize);
 	DDX_Control(pDX, IDC_CURRENT_CLOCK, m_currentclock);
 	DDX_Control(pDX, IDC_DURATION, m_duration);
-	DDX_Control(pDX, IDC_FORMAT_BITRATE, m_formatbitrate);
-	DDX_Control(pDX, IDC_FORMAT_DURATION, m_formatduration);
-	DDX_Control(pDX, IDC_FORMAT_INPUTFORMAT, m_formatinputformat);
-	DDX_Control(pDX, IDC_FORMAT_METADATA, m_formatmetadata);
-	DDX_Control(pDX, IDC_FORMAT_PROTOCOL, m_formatprotocol);
-	DDX_Control(pDX, IDC_CODECV_RESOLUTION, m_codecvresolution);
 	DDX_Control(pDX, IDC_PLAY_PROGRESS, m_playprogress);
 	DDX_Control(pDX, IDC_INPUTURL, m_inputurl);
 	DDX_Control(pDX, IDC_LOGO, _displayWnd);
@@ -75,8 +63,6 @@ BEGIN_MESSAGE_MAP(CffplaymfcDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_SEEK_STEP, &CffplaymfcDlg::OnBnClickedSeekStep)
 	ON_BN_CLICKED(IDC_FULLSCREEN, &CffplaymfcDlg::OnBnClickedFullscreen)
 	ON_BN_CLICKED(IDC_INPUTURL_BUTTON, &CffplaymfcDlg::OnBnClickedInputurlButton)
-	ON_BN_CLICKED(IDC_VIDEODECODE, &CffplaymfcDlg::OnBnClickedVideodecode)
-	ON_BN_CLICKED(IDC_AUDIODECODE, &CffplaymfcDlg::OnBnClickedAudiodecode)
 	ON_WM_DROPFILES()
 	ON_COMMAND(IDC_ABOUT, &CffplaymfcDlg::OnAbout)
 	ON_COMMAND(IDC_SYSINFO, &CffplaymfcDlg::OnSysinfo)
@@ -324,36 +310,15 @@ void CffplaymfcDlg::OnBnClickedInputurlButton()
 
 void CffplaymfcDlg::SystemClear()
 {
-	vddlg->m_videodecodelist.DeleteAllItems();
-	addlg->m_audiodecodelist.DeleteAllItems();
-}
-
-void CffplaymfcDlg::OnBnClickedVideodecode()
-{
-	vddlg->ShowWindow(TRUE);
-}
-
-
-void CffplaymfcDlg::OnBnClickedAudiodecode()
-{
-	addlg->ShowWindow(TRUE);
 }
 
 void CffplaymfcDlg::CreateSubWindow(){
-	vddlg=new VideodecodeDlg;
-	vddlg->Create(IDD_VIDEODECODE_DIALOG);
-	addlg=new AudiodecodeDlg;
-	addlg->Create(IDD_AUDIODECODE_DIALOG);
 	sidlg=new SysinfoDlg;
 	sidlg->Create(IDD_SYSINFO_DIALOG);
 }
 
 void CffplaymfcDlg::FreeSubWindow(){
-	vddlg->DestroyWindow();
-	addlg->DestroyWindow();
 	sidlg->DestroyWindow();
-	delete vddlg;
-	delete addlg;
 	delete sidlg;
 }
 

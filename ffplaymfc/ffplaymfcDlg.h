@@ -15,8 +15,6 @@
  */
 
 #pragma once
-#include "VideodecodeDlg.h"
-#include "AudiodecodeDlg.h"
 #include "SysinfoDlg.h"
 #include "afxwin.h"
 
@@ -57,33 +55,31 @@ public:
 	afx_msg void OnBnClickedSeekStep();
 	afx_msg void OnBnClickedFullscreen();
 	afx_msg void OnBnClickedInputurlButton();
-	afx_msg void OnBnClickedVideodecode();
-	afx_msg void OnBnClickedAudiodecode();
+	
 	//Control
-	CEdit m_codecachannels;
-	CEdit m_codecaname;
-	CEdit m_codecasamplerate;
-	CEdit m_codecvname;
-	CEdit m_codecvframerate;
-	CEdit m_codecvpixfmt;
 	CEdit m_currentclock;
 	CEdit m_duration;
-	CEdit m_formatbitrate;
-	CEdit m_formatduration;
-	CEdit m_formatinputformat;
-	CEdit m_formatmetadata;
-	CEdit m_formatprotocol;
-	CEdit m_codecvresolution;
 	CSliderCtrl m_playprogress;
 	CEdit m_inputurl;
+
+	CString _strBitrate;
+	CString _strDuration;
+	CString _strInputFormat;
+	CString _strMetaData;
+	CString _strProtocol;
+	CString _strCodecAChannels;
+	CString _strCodecAName;
+	CString _strCodecASampleRate;
+	CString _strCodecVFramerate;
+	CString _strCodecVPixfmt;
+	CString _strCodecVName;
+	CString _strCodecVResolution;
 
 	void ResetBtn();
 	void ActiveBtn();
 	
 	//Dialog
 	void SystemClear();
-	VideodecodeDlg *vddlg;
-	AudiodecodeDlg *addlg;
 	SysinfoDlg *sidlg;
 	void CreateSubWindow();
 	void FreeSubWindow();

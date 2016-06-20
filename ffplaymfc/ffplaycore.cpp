@@ -361,14 +361,14 @@ int ffmfc_param_global(VideoState *is){
 #else
 		input_protocol.Format(_T("%s"),up->name);
 #endif
-		dlg->m_formatprotocol.SetWindowText(input_protocol);
+		dlg->_strProtocol = input_protocol;
 	}
 
 
 	//视频解码参数，有视频的时候设置
 	if(video_stream!=-1){
 		wxh.Format(_T("%d x %d"),pCodecCtx->width,pCodecCtx->height);
-		dlg->m_codecvresolution.SetWindowText(wxh);
+		dlg->_strCodecVResolution = wxh;
 
 #ifdef _UNICODE
 		decoder_name.Format(_T("%s"),A2W(pCodecCtx->codec->long_name));
@@ -376,12 +376,11 @@ int ffmfc_param_global(VideoState *is){
 		decoder_name.Format(_T("%s"),pCodecCtx->codec->long_name);
 #endif
 
-		
-		dlg->m_codecvname.SetWindowText(decoder_name);
+		dlg->_strCodecVName = decoder_name;
 		//帧率显示还有问题
 		framerate_temp=(pFormatCtx->streams[video_stream]->r_frame_rate.num)/(pFormatCtx->streams[video_stream]->r_frame_rate.den);
 		framerate.Format(_T("%5.2ffps"),framerate_temp);
-		dlg->m_codecvframerate.SetWindowText(framerate);
+		dlg->_strCodecVFramerate = framerate;
 
 		switch(pCodecCtx->pix_fmt){
 		case 0:
@@ -397,7 +396,7 @@ int ffmfc_param_global(VideoState *is){
 		default:
 			pix_fmt.Format(_T("UNKNOWN"));
 		}
-		dlg->m_codecvpixfmt.SetWindowText(pix_fmt);
+		dlg->_strCodecVPixfmt = pix_fmt;
 	}
 	//音频解码参数，有音频的时候设置
 	if(audio_stream!=-1){
@@ -407,16 +406,17 @@ int ffmfc_param_global(VideoState *is){
 		decoder_name_au.Format(_T("%s"),pCodecCtx_au->codec->long_name);
 #endif
 
-		dlg->m_codecaname.SetWindowText(decoder_name_au);
+		dlg->_strCodecAName = decoder_name_au;
 		sample_rate_au.Format(_T("%d"),pCodecCtx_au->sample_rate);
-		dlg->m_codecasamplerate.SetWindowText(sample_rate_au);
+		dlg->_strCodecASampleRate = sample_rate_au;
 		channels_au.Format(_T("%d"),pCodecCtx_au->channels);
-		dlg->m_codecachannels.SetWindowText(channels_au);
+		dlg->_strCodecAChannels = channels_au;
 	}
 	//显示成以k为单位
 	bitrate_temp=((float)(pFormatCtx->bit_rate))/1000;
 	bitrate.Format(_T("%5.2fkbps"),bitrate_temp);
-	dlg->m_formatbitrate.SetWindowText(bitrate);
+	dlg->_strBitrate = bitrate;
+
 	//duration是以微秒为单位
 	timelong_temp=(pFormatCtx->duration)/1000000;
 	//转换成hh:mm:ss形式
@@ -426,7 +426,7 @@ int ffmfc_param_global(VideoState *is){
 	tmm  = (tns % 3600) / 60;
 	tss  = (tns % 60);
 	timelong.Format(_T("%02d:%02d:%02d"),thh,tmm,tss);
-	dlg->m_formatduration.SetWindowText(timelong);
+	dlg->_strDuration = timelong;
 	dlg->m_duration.SetWindowText(timelong);
 	//输入文件的封装格式------
 	
@@ -436,7 +436,7 @@ int ffmfc_param_global(VideoState *is){
 	input_format.Format(_T("%s"),pFormatCtx->iformat->long_name);
 #endif
 
-	dlg->m_formatinputformat.SetWindowText(input_format);
+	dlg->_strInputFormat = input_format;
 	//------------------------
 
 
@@ -478,7 +478,7 @@ int ffmfc_param_global(VideoState *is){
 	//MultiLine  设置为 True
 
 	//dlg->m_metadata.SetWindowText(author+"\r\n"+copyright+"\r\n"+description);
-	dlg->m_formatmetadata.SetWindowText(meta);
+	dlg->_strMetaData = meta;
 	//--------------------------------------------------------------------
 	return 0;
 }
@@ -502,120 +502,6 @@ int ffmfc_param_packet(VideoState *is,AVPacket *packet){
 
 	//自增-----------------------------------------------
 	packet_index++;
-	return 0;
-}
-
-
-//视频帧参数提取
-int ffmfc_param_vframe(VideoState *is,AVFrame *pFrame,AVPacket *packet){
-	//--------------------------------------------------------------------
-	CString key_frame,pict_type,reference,f_index,pts,dts,codednum;
-	AVFormatContext *pFormatCtx = is->ic;
-	int video_stream=is->video_stream;
-	AVCodecContext *pCodecCtx = pFormatCtx->streams[video_stream]->codec;
-	
-	USES_CONVERSION;
-	//避免数据太多，超过一定量之后，就会清零--------------------------
-
-	if(vframe_index>=MAX_FRAME_NUM){
-		dlg->SystemClear();
-	}
-
-	//------------------------------
-	f_index.Format(_T("%d"),vframe_index);
-	//获取当前记录条数
-	int nIndex=dlg->vddlg->m_videodecodelist.GetItemCount();
-	//“行”数据结构
-	LV_ITEM lvitem;
-	lvitem.mask=LVIF_TEXT;
-	lvitem.iItem=nIndex;
-	lvitem.iSubItem=0;
-	//注：vframe_index不可以直接赋值！
-	//务必使用f_index执行Format!再赋值！
-	lvitem.pszText=f_index.GetBuffer();
-	//------------------------
-
-
-	switch(pFrame->key_frame){
-	case 0:
-		key_frame.Format(_T("No"));break;
-	case 1:
-		key_frame.Format(_T("Yes"));break;
-	default:
-		key_frame.Format(_T("Unknown"));
-	}
-
-	switch(pFrame->pict_type){
-	case 0:
-		pict_type.Format(_T("Unknown"));break;
-	case 1:
-		pict_type.Format(_T("I"));break;
-	case 2:
-		pict_type.Format(_T("P"));break;
-	case 3:
-		pict_type.Format(_T("B"));break;
-	case 4:
-		pict_type.Format(_T("S"));break;
-	case 5:
-		pict_type.Format(_T("SI"));break;
-	case 6:
-		pict_type.Format(_T("SP"));break;
-	case 7:
-		pict_type.Format(_T("BI"));break;
-	default:
-		pict_type.Format(_T("Unknown"));
-	}
-
-	reference.Format(_T("%d"),pFrame->reference);
-	pts.Format(_T("%d"),pFrame->pkt_pts);
-	dts.Format(_T("%d"),pFrame->pkt_dts);
-	codednum.Format(_T("%d"),pFrame->coded_picture_number);
-
-	//插入表格------------------------
-	dlg->vddlg->m_videodecodelist.InsertItem(&lvitem);
-	dlg->vddlg->m_videodecodelist.SetItemText(nIndex,1,pict_type);
-	dlg->vddlg->m_videodecodelist.SetItemText(nIndex,2,key_frame);
-	dlg->vddlg->m_videodecodelist.SetItemText(nIndex,3,codednum);
-	dlg->vddlg->m_videodecodelist.SetItemText(nIndex,4,pts);
-	dlg->vddlg->m_videodecodelist.SendMessage(WM_VSCROLL, SB_BOTTOM, NULL);
-	vframe_index++;
-	return 0;
-}
-
-//音频帧参数提取
-int ffmfc_param_aframe(VideoState *is,AVFrame *pFrame,AVPacket *packet){
-	//--------------------------------------------------------------------
-	AVFormatContext *pFormatCtx = is->ic;
-	int audio_stream=is->audio_stream;
-	AVCodecContext *pCodecCtx = pFormatCtx->streams[audio_stream]->codec;
-	//避免数据太多，超过一定量之后，就会清零--------------------------
-
-	if(aframe_index>=MAX_FRAME_NUM){
-		dlg->SystemClear();
-	}
-	//------------------------------
-	CString f_index,packet_size,pts;
-	//---------------
-	f_index.Format(_T("%d"),aframe_index);
-	//获取当前记录条数
-	int nIndex=dlg->addlg->m_audiodecodelist.GetItemCount();
-	//“行”数据结构
-	LV_ITEM lvitem;
-	lvitem.mask=LVIF_TEXT;
-	lvitem.iItem=nIndex;
-	lvitem.iSubItem=0;
-	//注：frame_index不可以直接赋值！
-	//务必使用f_index执行Format!再赋值！
-	lvitem.pszText=f_index.GetBuffer();
-	//------------------------
-	packet_size.Format(_T("%d"),packet->size);
-	pts.Format(_T("%d"),packet->pts);
-	//---------------
-	dlg->addlg->m_audiodecodelist.InsertItem(&lvitem);
-	dlg->addlg->m_audiodecodelist.SetItemText(nIndex,1,packet_size);
-	dlg->addlg->m_audiodecodelist.SetItemText(nIndex,2,pts);
-	dlg->addlg->m_audiodecodelist.SendMessage(WM_VSCROLL, SB_BOTTOM, NULL);
-	aframe_index++;
 	return 0;
 }
 
@@ -1669,8 +1555,6 @@ static int get_video_frame(VideoState *is, AVFrame *frame, int64_t *pts, AVPacke
 		return 0;
 
 	if (got_picture) {
-		//注意：此处设置MFC参数！
-		ffmfc_param_vframe(is,frame,pkt);
 		//--------------------------
 		int ret = 1;
 
@@ -2021,8 +1905,7 @@ static int audio_decode_frame(VideoState *is, double *pts_ptr)
 				break;
 			}
 			
-			//注意：此处设置MFC参数---
-			ffmfc_param_aframe(is,is->frame,pkt_temp);
+
 			//----------
 
 			//------------------------

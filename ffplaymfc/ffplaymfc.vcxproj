@@ -111,7 +111,6 @@
     <None Include="res\ffplaymfc.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudiodecodeDlg.h" />
     <ClInclude Include="cmdutils.h" />
     <ClInclude Include="cmdutils_common_opts.h" />
     <ClInclude Include="config.h" />
@@ -124,10 +123,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SysinfoDlg.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="VideodecodeDlg.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudiodecodeDlg.cpp" />
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="ffplaycore.cpp" />
@@ -138,13 +135,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SysinfoDlg.cpp" />
-    <ClCompile Include="VideodecodeDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ffplaymfc.rc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\版本日志.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\ffplay.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
