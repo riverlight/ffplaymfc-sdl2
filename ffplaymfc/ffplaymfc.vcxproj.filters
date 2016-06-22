@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="dbg">
+      <UniqueIdentifier>{0b84d1fa-f533-49a6-9e36-23cbcc7fb81d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -66,6 +69,12 @@
     <ClInclude Include="displayDef.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="flvmaker.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dbg\vdbg.h">
+      <Filter>dbg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ffplaymfc.cpp">
@@ -88,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="display.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="flvmaker.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dbg\vdbg.cpp">
+      <Filter>dbg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

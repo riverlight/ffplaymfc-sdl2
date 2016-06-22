@@ -114,11 +114,13 @@
     <ClInclude Include="cmdutils.h" />
     <ClInclude Include="cmdutils_common_opts.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="dbg\vdbg.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="displayDef.h" />
     <ClInclude Include="ffplaycore.h" />
     <ClInclude Include="ffplaymfc.h" />
     <ClInclude Include="ffplaymfcDlg.h" />
+    <ClInclude Include="flvmaker.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SysinfoDlg.h" />
@@ -126,10 +128,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdutils.cpp" />
+    <ClCompile Include="dbg\vdbg.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="ffplaycore.cpp" />
     <ClCompile Include="ffplaymfc.cpp" />
     <ClCompile Include="ffplaymfcDlg.cpp" />
+    <ClCompile Include="flvmaker.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

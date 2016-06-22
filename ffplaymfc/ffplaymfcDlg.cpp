@@ -36,7 +36,8 @@ CffplaymfcDlg::CffplaymfcDlg(CWnd* pParent /*=NULL*/)
 
 CffplaymfcDlg::~CffplaymfcDlg()
 {
-	
+	delete _pFlvMaker;
+	_pFlvMaker = NULL;
 }
 
 void CffplaymfcDlg::DoDataExchange(CDataExchange* pDX)
@@ -148,7 +149,10 @@ BOOL CffplaymfcDlg::OnInitDialog()
 		m_inputurl.SetWindowText(argvPath);
 		OnBnClickedStart();
 	}
-	m_inputurl.SetWindowTextW(TEXT("rtmp://live.videojj.com/app-name/leon123"));
+	//m_inputurl.SetWindowTextW(TEXT("rtmp://live.videojj.com/app-name/leon123"));
+	m_inputurl.SetWindowTextW(TEXT("D:\\workroom\\testroom\\test.flv"));
+	
+	_pFlvMaker = new CFlvMaker("d://workroom/testroom/ffplay.264");
 		
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -282,7 +286,7 @@ void CffplaymfcDlg::OnBnClickedInputurlButton()
 	CString FilePathName;
 	//文件过滤字符串。够长
 	CString strfilter;
-	strfilter.Append(_T("Common media formats|*.avi;*.wmv;*.wmp;*.wm;*.asf;*.rm;*.ram;*.rmvb;*.ra;*.mpg;*.mpeg;*.mpe;*.m1v;*.m2v;*.mpv2;"));
+	strfilter.Append(_T("Common media formats|*.avi;*.wmv;*.wmp;*.wm;*.asf;*.rm;*.ram;*.rmvb;*.ra;*.mpg;*.mpeg;*.mpe;*.m1v;*.m2v;*.mpv2;*.flv;"));
 	strfilter.Append(_T("*.mp2v;*.dat;*.mp4;*.m4v;*.m4p;*.vob;*.ac3;*.dts;*.mov;*.qt;*.mr;*.3gp;*.3gpp;*.3g2;*.3gp2;*.swf;*.ogg;*.wma;*.wav;"));
 	strfilter.Append(_T("*.mid;*.midi;*.mpa;*.mp2;*.mp3;*.m1a;*.m2a;*.m4a;*.aac;*.mkv;*.ogm;*.m4b;*.tp;*.ts;*.tpr;*.pva;*.pss;*.wv;*.m2ts;*.evo;"));
 	strfilter.Append(_T("*.rpm;*.realpix;*.rt;*.smi;*.smil;*.scm;*.aif;*.aiff;*.aifc;*.amr;*.amv;*.au;*.acc;*.dsa;*.dsm;*.dsv;*.dss;*.pmp;*.smk;*.flic|"));

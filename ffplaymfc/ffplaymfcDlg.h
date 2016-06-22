@@ -15,6 +15,7 @@
  */
 
 #pragma once
+#include "flvmaker.h"
 #include "SysinfoDlg.h"
 #include "afxwin.h"
 
@@ -31,7 +32,6 @@ public:
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
-
 
 // 实现
 protected:
@@ -74,6 +74,9 @@ public:
 	CString _strCodecVPixfmt;
 	CString _strCodecVName;
 	CString _strCodecVResolution;
+
+	// 文件
+	CFlvMaker *_pFlvMaker;
 
 	void ResetBtn();
 	void ActiveBtn();

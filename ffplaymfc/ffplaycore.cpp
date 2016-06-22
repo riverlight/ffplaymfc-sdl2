@@ -16,6 +16,7 @@
 
 #include "stdafx.h"
 
+#include "dbg\vdbg.h"
 #include "display.h"
 #include "ffplaycore.h"
 
@@ -1530,6 +1531,9 @@ static int get_video_frame(VideoState *is, AVFrame *frame, int64_t *pts, AVPacke
 	if (packet_queue_get(&is->videoq, pkt, 1) < 0)
 		return -1;
 
+	if (pkt->size!=0)
+		dlg->_pFlvMaker->Write(pkt->data, pkt->size, 0);
+
 	if (pkt->data == flush_pkt.data) {
 		avcodec_flush_buffers(is->video_st->codec);
 
@@ -1638,87 +1642,9 @@ static int video_thread(void *arg)
 		if (!ret)
 			continue;
 
-#if CONFIG_AVFILTER
-		if (   last_w != is->video_st->codec->width
-			|| last_h != is->video_st->codec->height
-			|| last_format != is->video_st->codec->pix_fmt) {
-				av_log(NULL, AV_LOG_INFO, "Frame changed from size:%dx%d to size:%dx%d\n",
-					last_w, last_h, is->video_st->codec->width, is->video_st->codec->height);
-				avfilter_graph_free(&graph);
-				graph = avfilter_graph_alloc();
-				if ((ret = configure_video_filters(graph, is, vfilters)) < 0) {
-					SDL_Event event;
-					event.type = FF_QUIT_EVENT;
-					event.user.data1 = is;
-					SDL_PushEvent(&event);
-					av_free_packet(&pkt);
-					goto the_end;
-				}
-				filt_in  = is->in_video_filter;
-				filt_out = is->out_video_filter;
-				last_w = is->video_st->codec->width;
-				last_h = is->video_st->codec->height;
-				last_format = is->video_st->codec->pix_fmt;
-		}
-
-		frame->pts = pts_int;
-		frame->sample_aspect_ratio = av_guess_sample_aspect_ratio(is->ic, is->video_st, frame);
-		if (is->use_dr1 && frame->opaque) {
-			FrameBuffer      *buf = frame->opaque;
-			AVFilterBufferRef *fb = avfilter_get_video_buffer_ref_from_arrays(
-				frame->data, frame->linesize,
-				AV_PERM_READ | AV_PERM_PRESERVE,
-				frame->width, frame->height,
-				frame->format);
-
-			avfilter_copy_frame_props(fb, frame);
-			fb->buf->priv           = buf;
-			fb->buf->free           = filter_release_buffer;
-
-			buf->refcount++;
-			av_buffersrc_add_ref(filt_in, fb, AV_BUFFERSRC_FLAG_NO_COPY);
-
-		} else
-			av_buffersrc_write_frame(filt_in, frame);
-
-		av_free_packet(&pkt);
-
-		while (ret >= 0) {
-			is->frame_last_returned_time = av_gettime() / 1000000.0;
-
-			ret = av_buffersink_get_buffer_ref(filt_out, &picref, 0);
-			if (ret < 0) {
-				ret = 0;
-				break;
-			}
-
-			is->frame_last_filter_delay = av_gettime() / 1000000.0 - is->frame_last_returned_time;
-			if (fabs(is->frame_last_filter_delay) > AV_NOSYNC_THRESHOLD / 10.0)
-				is->frame_last_filter_delay = 0;
-
-			avfilter_copy_buf_props(frame, picref);
-
-			pts_int = picref->pts;
-			tb      = filt_out->inputs[0]->time_base;
-			pos     = picref->pos;
-			frame->opaque = picref;
-
-			if (av_cmp_q(tb, is->video_st->time_base)) {
-				av_unused int64_t pts1 = pts_int;
-				pts_int = av_rescale_q(pts_int, tb, is->video_st->time_base);
-				av_dlog(NULL, "video_thread(): "
-					"tb:%d/%d pts:%"PRId64" -> tb:%d/%d pts:%"PRId64"\n",
-					tb.num, tb.den, pts1,
-					is->video_st->time_base.num, is->video_st->time_base.den, pts_int);
-			}
-			pts = pts_int * av_q2d(is->video_st->time_base);
-			ret = queue_picture(is, frame, pts, pos);
-		}
-#else
 		pts = pts_int * av_q2d(is->video_st->time_base);
 		//解码成功后用于显示，也是放到另一个队列中？
 		ret = queue_picture(is, frame, pts, pkt.pos);
-#endif
 
 		if (ret < 0)
 			goto the_end;
@@ -2007,6 +1933,9 @@ static int audio_decode_frame(VideoState *is, double *pts_ptr)
 		/* read next packet */
 		if ((new_packet = packet_queue_get(&is->audioq, pkt, 1)) < 0)
 			return -1;
+
+		if (pkt->size!=0)
+			dlg->_pFlvMaker->Write(pkt->data, pkt->size, 1);
 
 		if (pkt->data == flush_pkt.data) {
 			avcodec_flush_buffers(dec);
@@ -2400,6 +2329,7 @@ static int read_thread(void *arg)
 		ret = -1;
 		goto fail;
 	}
+	
 	for (i = 0; i < orig_nb_streams; i++)
 		av_dict_free(&opts[i]);
 	av_freep(&opts);
@@ -2467,6 +2397,9 @@ static int read_thread(void *arg)
 	ret = -1;
 	if (st_index[AVMEDIA_TYPE_VIDEO] >= 0) {
 		ret = stream_component_open(is, st_index[AVMEDIA_TYPE_VIDEO]);
+
+		dlg->_pFlvMaker->WriteAVCDecoderConfigurationRecord(ic->streams[st_index[AVMEDIA_TYPE_VIDEO]]->codec->extradata, \
+			ic->streams[st_index[AVMEDIA_TYPE_VIDEO]]->codec->extradata_size);
 	}
 	is->refresh_tid = SDL_CreateThread(refresh_thread, "refresh-tid", is);
 
@@ -2487,7 +2420,6 @@ static int read_thread(void *arg)
 	//注意：在此处设置MFC参数
 	ffmfc_param_global(is);
 	
-
 	for (;;) {
 		if (is->abort_request)
 			break;
