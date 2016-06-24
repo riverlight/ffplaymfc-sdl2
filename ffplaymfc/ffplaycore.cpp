@@ -1530,10 +1530,7 @@ static int get_video_frame(VideoState *is, AVFrame *frame, int64_t *pts, AVPacke
 	//从Packet队列中获取Packet
 	if (packet_queue_get(&is->videoq, pkt, 1) < 0)
 		return -1;
-
-	if (pkt->size!=0)
-		dlg->_pFlvMaker->Write(pkt->data, pkt->size, 0);
-
+	
 	if (pkt->data == flush_pkt.data) {
 		avcodec_flush_buffers(is->video_st->codec);
 
@@ -1808,7 +1805,7 @@ static int audio_decode_frame(VideoState *is, double *pts_ptr)
 	int new_packet = 0;
 	int flush_complete = 0;
 	int wanted_nb_samples;
-
+	
 	for (;;) {
 		/* NOTE: the audio packet can contain several frames */
 		while (pkt_temp->size > 0 || (!pkt_temp->data && new_packet)) {
@@ -1934,9 +1931,6 @@ static int audio_decode_frame(VideoState *is, double *pts_ptr)
 		if ((new_packet = packet_queue_get(&is->audioq, pkt, 1)) < 0)
 			return -1;
 
-		if (pkt->size!=0)
-			dlg->_pFlvMaker->Write(pkt->data, pkt->size, 1);
-
 		if (pkt->data == flush_pkt.data) {
 			avcodec_flush_buffers(dec);
 			flush_complete = 0;
@@ -2017,6 +2011,7 @@ static int audio_open(void *opaque, int64_t wanted_channel_layout, int wanted_nb
 	wanted_spec.userdata = opaque;
 	while (SDL_OpenAudio(&wanted_spec, &spec) < 0) {
 		fprintf(stderr, "SDL_OpenAudio (%d channels): %s\n", wanted_spec.channels, SDL_GetError());
+		TRACE("SDL_OpenAudio (%d channels): %s\n", wanted_spec.channels, SDL_GetError());
 		wanted_spec.channels = next_nb_channels[FFMIN(7, wanted_spec.channels)];
 		if (!wanted_spec.channels) {
 			fprintf(stderr, "No more channel combinations to try, audio open failed\n");
@@ -2392,6 +2387,9 @@ static int read_thread(void *arg)
 	if (st_index[AVMEDIA_TYPE_AUDIO] >= 0) {
 		//打开
 		stream_component_open(is, st_index[AVMEDIA_TYPE_AUDIO]);
+		
+		dlg->_pFlvMaker->WriteAudioSpecificConfig(ic->streams[st_index[AVMEDIA_TYPE_AUDIO]]->codec->extradata, \
+			ic->streams[st_index[AVMEDIA_TYPE_AUDIO]]->codec->extradata_size);
 	}
 
 	ret = -1;
@@ -2524,6 +2522,15 @@ static int read_thread(void *arg)
 		//printf("Packet Size：%d\n",pkt->size);
 		//printf("Packet dts：%d\n",pkt->dts);
 		//此处设置图表参数
+		int dataType;
+		if (st_index[pkt->stream_index] == AVMEDIA_TYPE_VIDEO)
+			dataType = 0;
+		else if (st_index[pkt->stream_index] == AVMEDIA_TYPE_AUDIO)
+			dataType = 1;
+		else
+			dataType = 2;
+		if (pkt->size!=0)
+			dlg->_pFlvMaker->Write(pkt->data, pkt->size, dataType);
 
 		ffmfc_param_packet(is,pkt);
 		//--------------------
