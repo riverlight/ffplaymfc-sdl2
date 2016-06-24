@@ -30,6 +30,8 @@ private:
 
 private:
 	std::ofstream *_pFlvFile;
+	std::ofstream *_pH264File;
+	std::ofstream *_pAACFile;
 
 	// aac
 	int _aacProfile;

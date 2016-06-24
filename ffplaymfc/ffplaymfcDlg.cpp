@@ -152,7 +152,7 @@ BOOL CffplaymfcDlg::OnInitDialog()
 	//m_inputurl.SetWindowTextW(TEXT("rtmp://live.videojj.com/app-name/leon123"));
 	m_inputurl.SetWindowTextW(TEXT("D:\\workroom\\testroom\\test.flv"));
 	
-	_pFlvMaker = new CFlvMaker("d://workroom/testroom/ffplay.aac");
+	_pFlvMaker = new CFlvMaker("d://workroom/testroom/ffplay.flv");
 		
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
