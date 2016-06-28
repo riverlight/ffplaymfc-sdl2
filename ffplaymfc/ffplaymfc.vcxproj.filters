@@ -75,6 +75,12 @@
     <ClInclude Include="dbg\vdbg.h">
       <Filter>dbg</Filter>
     </ClInclude>
+    <ClInclude Include="include\mediaCnvt\converter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mediaCnvt\splitter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ffplaymfc.cpp">

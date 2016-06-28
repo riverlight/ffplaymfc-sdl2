@@ -2529,8 +2529,9 @@ static int read_thread(void *arg)
 			dataType = 1;
 		else
 			dataType = 2;
+		TRACE("timestamp : %ld %ld\n", pkt->dts, pkt->pts);
 		if (pkt->size!=0)
-			dlg->_pFlvMaker->Write(pkt->data, pkt->size, dataType);
+			dlg->_pFlvMaker->Write(pkt->data, pkt->size, dataType, pkt->dts);
 
 		ffmfc_param_packet(is,pkt);
 		//--------------------

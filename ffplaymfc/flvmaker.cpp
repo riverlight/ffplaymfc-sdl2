@@ -2,29 +2,46 @@
 
 #include "flvmaker.h"
 
+#define NONE_BASETIME (-10000)
+
 static const unsigned int h264StartCode = 0x01000000;
 
 CFlvMaker::CFlvMaker(char *szName)
 {
-	_pFlvFile = new std::ofstream(szName, std::ios::binary | std::ios::out);
-	_pH264File = new std::ofstream("ffplay.264", std::ios::binary | std::ios::out);
-	_pAACFile = new std::ofstream("ffplay.aac", std::ios::binary | std::ios::out);
+	_pH264File = new std::ofstream("d:\\workroom\\testroom\\ffplay.264", std::ios::binary | std::ios::out);
+	_pAACFile = new std::ofstream("d:\\workroom\\testroom\\ffplay.aac", std::ios::binary | std::ios::out);
+
+	_pCnvt = new CConverter();
+	_pCnvt->Open(szName, 1, 1);
+
+	_pVideoBuffer = new unsigned char[2000000];
+	_pAudioBuffer = new unsigned char[10000];
+
+	n64VideoBaseTimeStamp = NONE_BASETIME;
 }
 
 CFlvMaker::~CFlvMaker()
 {
+	delete _pAudioBuffer;
+	_pAudioBuffer = NULL;
+	delete _pVideoBuffer;
+	_pVideoBuffer = NULL;
+
 	_pAACFile->close();
 	_pH264File->close();
-	_pFlvFile->close();
+
+	_pCnvt->Close();
+	delete _pCnvt;
+	_pCnvt = NULL;
 }
 
-int CFlvMaker::Write(unsigned char *data, int size, int datatype)
+int CFlvMaker::Write(unsigned char *data, int size, int datatype, int64_t dts)
 {
 	TRACE("datatype : %d\n", datatype);
 	if (datatype == 0)
-		WriteVideo(data, size);
+		WriteVideo(data, size, dts);
 	if (datatype == 1)
-		WriteAudio(data, size);
+		WriteAudio(data, size, dts);
 
 	return 1;
 }
@@ -39,6 +56,17 @@ int CFlvMaker::WriteAVCDecoderConfigurationRecord(unsigned char *data, int size)
 	_pH264File->write((char *)&h264StartCode, 4);
 	_pH264File->write((char*)data + 9 + spsSize + 2, ppsSize);
 
+	// for flv
+	unsigned char sps_pps[1000];
+	memset(sps_pps, 0, 1000);
+	memcpy(sps_pps, &h264StartCode, 4);
+	memcpy(sps_pps + 4, data + 8, spsSize);
+	_pCnvt->ConvertH264((char *)sps_pps, 4 + spsSize, 0);
+
+	memcpy(sps_pps, &h264StartCode, 4);
+	memcpy(sps_pps + 4, data + 9 + spsSize + 2, ppsSize);
+	_pCnvt->ConvertH264((char *)sps_pps, 4 + ppsSize, 0);
+
 	return 1;
 }
 
@@ -51,9 +79,14 @@ int CFlvMaker::WriteAudioSpecificConfig(unsigned char *data, int size)
 	return 1;
 }
 
-int CFlvMaker::WriteVideo(unsigned char *data, int size)
+int CFlvMaker::WriteVideo(unsigned char *data, int size, int64_t dts)
 {
 	int count = 0;
+	unsigned int nTimeStamp;
+	if (n64VideoBaseTimeStamp == NONE_BASETIME)
+		n64VideoBaseTimeStamp = dts;
+
+	nTimeStamp = (dts - n64VideoBaseTimeStamp) * 1000 / 30000;
 	while (1)
 	{
 		int nFrameSize = (data[count+0]<<24) + (data[count+1]<<16) + (data[count+2]<<8) + data[count+3];
@@ -66,6 +99,10 @@ int CFlvMaker::WriteVideo(unsigned char *data, int size)
 		_pH264File->write((char *)&h264StartCode, 4);
 		_pH264File->write((char*)data + count + 4, nFrameSize);
 
+		memcpy(_pVideoBuffer, &h264StartCode, 4);
+		memcpy(_pVideoBuffer + 4, data + count + 4, nFrameSize);
+		_pCnvt->ConvertH264((char *)_pVideoBuffer, 4 + nFrameSize, nTimeStamp);
+
 		count += (nFrameSize + 4);
 		if (count >= size)
 			break;
@@ -74,10 +111,16 @@ int CFlvMaker::WriteVideo(unsigned char *data, int size)
 	return 1;
 }
 
-int CFlvMaker::WriteAudio(unsigned char *data, int size)
+int CFlvMaker::WriteAudio(unsigned char *data, int size, int64_t dts)
 {
+	unsigned int nTimeStamp;
 	uint64_t bits = 0;
 	int dataSize = size;
+
+	if (dts < 0)
+		nTimeStamp = 0;
+	else
+		nTimeStamp = (dts * 1000) / 44100;
 
 	WriteU64(bits, 12, 0xFFF);
 	WriteU64(bits, 1, 0);
@@ -107,7 +150,9 @@ int CFlvMaker::WriteAudio(unsigned char *data, int size)
 	_pAACFile->write((char *)p64 + 1, 7);
 	_pAACFile->write((char *)data, size);
 
-	TRACE("audio size : %d\n", size);
+	memcpy(_pAudioBuffer, (char *)p64 + 1, 7);
+	memcpy(_pAudioBuffer + 7, data, size);
+	_pCnvt->ConvertAAC((char *)_pAudioBuffer, 7 + size, nTimeStamp);
 
 	return 1;
 }

@@ -21,7 +21,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -36,3 +35,4 @@ ipch/
 Release/
 ffplaymfc/Debug/
 ffplaymfc/Release/
+!ffplaymfc/lib/*.lib
