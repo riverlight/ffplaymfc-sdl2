@@ -16,5 +16,6 @@ flv 转换器使用的是 https://github.com/riverlight/H264toFLVConverter
 文件存储目录好像是 d:\\workroom\\testroom， 如果没有的话，请创建该目录
 
 -------------------------
+# 20160810 : 把 dll 补齐了
 # 20160628 : 现在支持保存 flv 文件了
 # 20160624 ：支持保存 h.264和 aac 文件

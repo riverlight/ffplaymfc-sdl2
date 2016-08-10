@@ -36,3 +36,4 @@ Release/
 ffplaymfc/Debug/
 ffplaymfc/Release/
 !ffplaymfc/lib/*.lib
+!ffplaymfc/bin/*.dll
