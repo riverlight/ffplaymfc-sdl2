@@ -1,4 +1,4 @@
-﻿#ifndef DISPLAYDEF_H
+#ifndef DISPLAYDEF_H
 #define DISPLAYDEF_H
 
 extern "C"

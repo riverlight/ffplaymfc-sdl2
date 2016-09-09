@@ -1,15 +1,15 @@
-ï»¿/* 
+/* 
  * FFplay for MFC
  *
- * é›·éœ„éª… Lei Xiaohua
+ * À×Ïöæè Lei Xiaohua
  * leixiaohua1020@126.com
- * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
+ * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
  * Communication University of China / Digital TV Technology
  *
  * http://blog.csdn.net/leixiaohua1020
  * 
- * æœ¬å·¥ç¨‹å°†ffmpegé¡¹ç›®ä¸­çš„ffplayæ’­æ”¾å™¨ï¼ˆffplay.cï¼‰ç§»æ¤åˆ°äº†VCçš„ç¯å¢ƒä¸‹ã€‚
- * å¹¶ä¸”ä½¿ç”¨MFCåšäº†ä¸€å¥—ç®€å•çš„ç•Œé¢ã€‚
+ * ±¾¹¤³Ì½«ffmpegÏîÄ¿ÖĞµÄffplay²¥·ÅÆ÷£¨ffplay.c£©ÒÆÖ²µ½ÁËVCµÄ»·¾³ÏÂ¡£
+ * ²¢ÇÒÊ¹ÓÃMFC×öÁËÒ»Ì×¼òµ¥µÄ½çÃæ¡£
  * This software transplant ffplay to Microsoft VC++ environment. 
  * And use MFC to build a simple Graphical User Interface. 
  */
@@ -62,59 +62,59 @@ extern "C"
 
 
 
-//æœ€å¤šå­˜å‚¨çš„å¸§ä¿¡æ¯
+//×î¶à´æ´¢µÄÖ¡ĞÅÏ¢
 #define MAX_FRAME_NUM 10000
-//æœ€å¤šå­˜å‚¨çš„Packetä¿¡æ¯
+//×î¶à´æ´¢µÄPacketĞÅÏ¢
 #define MAX_PACKET_NUM 10000
-//URLé•¿åº¦
+//URL³¤¶È
 #define MAX_URL_LENGTH 500
 
 
-//é™æ€å‡½æ•°åªèƒ½åœ¨å£°æ˜å®ƒçš„æ–‡ä»¶å½“ä¸­å¯è§ï¼Œä¸èƒ½è¢«å…¶ä»–æ–‡ä»¶æ‰€è°ƒç”¨ï¼Œä¹Ÿå°±æ˜¯è¯´è¯¥é™æ€å‡½æ•°åª
-//èƒ½åœ¨å…¶å®šä¹‰çš„.cppæˆ–.cä¸­è°ƒç”¨ï¼Œåœ¨å…¶å®ƒ.cppæˆ–.cæ–‡ä»¶çš„å‡½æ•°é‡Œæ˜¯ä¸èƒ½è¢«è°ƒç”¨çš„ã€‚â€
-//éœ€è¦å¯¹static void toggle_pause(VideoState *is)è¿›è¡Œå°è£…
+//¾²Ì¬º¯ÊıÖ»ÄÜÔÚÉùÃ÷ËüµÄÎÄ¼şµ±ÖĞ¿É¼û£¬²»ÄÜ±»ÆäËûÎÄ¼şËùµ÷ÓÃ£¬Ò²¾ÍÊÇËµ¸Ã¾²Ì¬º¯ÊıÖ»
+//ÄÜÔÚÆä¶¨ÒåµÄ.cpp»ò.cÖĞµ÷ÓÃ£¬ÔÚÆäËü.cpp»ò.cÎÄ¼şµÄº¯ÊıÀïÊÇ²»ÄÜ±»µ÷ÓÃµÄ¡£¡±
+//ĞèÒª¶Ôstatic void toggle_pause(VideoState *is)½øĞĞ·â×°
 
-//å‘é€â€œæš‚åœâ€å‘½ä»¤
+//·¢ËÍ¡°ÔİÍ£¡±ÃüÁî
 //Send Command "Pause"
 void ffmfc_play_pause();
 
-//å‘é€â€œé€å¸§â€å‘½ä»¤
+//·¢ËÍ¡°ÖğÖ¡¡±ÃüÁî
 //Send Command "Step"
 void ffmfc_seek_step();
 
-//å‘é€â€œå…¨å±â€å‘½ä»¤
+//·¢ËÍ¡°È«ÆÁ¡±ÃüÁî
 //Send Command "FullScreen"
 void ffmfc_play_fullcreen();
 
-//å‘é€â€œå‰è¿›/åé€€â€å‘½ä»¤
+//·¢ËÍ¡°Ç°½ø/ºóÍË¡±ÃüÁî
 //Send Command "Seek"
 void ffmfc_seek(int time);
 
-//å‘é€â€œå®½é«˜æ¯”â€å‘½ä»¤
+//·¢ËÍ¡°¿í¸ß±È¡±ÃüÁî
 //Send Command "AspectRatio"
 void ffmfc_aspectratio(int num,int den);
 
-//å‘é€â€œå¤§å°â€å‘½ä»¤
+//·¢ËÍ¡°´óĞ¡¡±ÃüÁî
 //Send Command "WindowSize"
 void ffmfc_size(int percentage);
 
-//å‘é€â€œçª—å£ç”»é¢å†…å®¹â€å‘½ä»¤
+//·¢ËÍ¡°´°¿Ú»­ÃæÄÚÈİ¡±ÃüÁî
 //Send Command "Audio Display Mode"
 void ffmfc_audio_display(int mode);
 
-//å‘é€â€œé€€å‡ºâ€å‘½ä»¤
+//·¢ËÍ¡°ÍË³ö¡±ÃüÁî
 //Send Command "Quit"
 void ffmfc_quit();
 
-//è§£ç ä¸»å‡½æ•°
+//½âÂëÖ÷º¯Êı
 //Main function
 int ffmfc_play(LPVOID lpParam);
 
-//å¤ä½
+//¸´Î»
 //Reset
 int ffmfc_reset_index();
 
-//æ’­æ”¾è¿›åº¦
+//²¥·Å½ø¶È
 //Seek Bar
 void ffmfc_seek_bar(int pos);
 //Stretch

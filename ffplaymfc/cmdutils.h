@@ -1,9 +1,9 @@
-ï»¿/* 
+/* 
  * FFplay for Visual Studio
  *
- * é›·éœ„éª… Lei Xiaohua
+ * À×Ïöæè Lei Xiaohua
  * leixiaohua1020@126.com
- * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
+ * ÖÐ¹ú´«Ã½´óÑ§/Êý×ÖµçÊÓ¼¼Êõ
  * Communication University of China / Digital TV Technology
  * http://blog.csdn.net/leixiaohua1020
  *

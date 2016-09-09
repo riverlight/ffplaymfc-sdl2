@@ -1,4 +1,4 @@
-﻿#ifndef VDBG_H
+#ifndef VDBG_H
 #define VDBG_H
 
 #ifdef __cplusplus

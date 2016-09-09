@@ -1,15 +1,15 @@
-ï»¿/* 
+/* 
  * FFplay for MFC
  *
- * é›·éœ„éª… Lei Xiaohua
+ * À×Ïöæè Lei Xiaohua
  * leixiaohua1020@126.com
- * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
+ * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
  * Communication University of China / Digital TV Technology
  *
  * http://blog.csdn.net/leixiaohua1020
  * 
- * æœ¬å·¥ç¨‹å°†ffmpegé¡¹ç›®ä¸­çš„ffplayæ’­æ”¾å™¨ï¼ˆffplay.cï¼‰ç§»æ¤åˆ°äº†VCçš„ç¯å¢ƒä¸‹ã€‚
- * å¹¶ä¸”ä½¿ç”¨MFCåšäº†ä¸€å¥—ç®€å•çš„ç•Œé¢ã€‚
+ * ±¾¹¤³Ì½«ffmpegÏîÄ¿ÖĞµÄffplay²¥·ÅÆ÷£¨ffplay.c£©ÒÆÖ²µ½ÁËVCµÄ»·¾³ÏÂ¡£
+ * ²¢ÇÒÊ¹ÓÃMFC×öÁËÒ»Ì×¼òµ¥µÄ½çÃæ¡£
  * This software transplant ffplay to Microsoft VC++ environment. 
  * And use MFC to build a simple Graphical User Interface. 
  */
@@ -24,21 +24,21 @@ extern "C"
 };
 
 
-// Sysinfosubac å¯¹è¯æ¡†
+// Sysinfosubac ¶Ô»°¿ò
 
 class Sysinfosubac : public CDialogEx
 {
 	DECLARE_DYNAMIC(Sysinfosubac)
 
 public:
-	Sysinfosubac(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	Sysinfosubac(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~Sysinfosubac();
 
-	// å¯¹è¯æ¡†æ•°æ®
+	// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFOSUB_AC };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -46,21 +46,21 @@ public:
 };
 
 
-// Sysinfosubif å¯¹è¯æ¡†
+// Sysinfosubif ¶Ô»°¿ò
 
 class Sysinfosubif : public CDialogEx
 {
 	DECLARE_DYNAMIC(Sysinfosubif)
 
 public:
-	Sysinfosubif(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	Sysinfosubif(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~Sysinfosubif();
 
-	// å¯¹è¯æ¡†æ•°æ®
+	// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFOSUB_IF };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -68,21 +68,21 @@ public:
 };
 
 
-// Sysinfosuboc å¯¹è¯æ¡†
+// Sysinfosuboc ¶Ô»°¿ò
 
 class Sysinfosuboc : public CDialogEx
 {
 	DECLARE_DYNAMIC(Sysinfosuboc)
 
 public:
-	Sysinfosuboc(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	Sysinfosuboc(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~Sysinfosuboc();
 
-	// å¯¹è¯æ¡†æ•°æ®
+	// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFOSUB_OC };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -91,21 +91,21 @@ public:
 
 
 
-// Sysinfosubup å¯¹è¯æ¡†
+// Sysinfosubup ¶Ô»°¿ò
 
 class Sysinfosubup : public CDialogEx
 {
 	DECLARE_DYNAMIC(Sysinfosubup)
 
 public:
-	Sysinfosubup(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	Sysinfosubup(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~Sysinfosubup();
 
-	// å¯¹è¯æ¡†æ•°æ®
+	// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFOSUB_UP };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -113,21 +113,21 @@ public:
 };
 
 
-// Sysinfosubvc å¯¹è¯æ¡†
+// Sysinfosubvc ¶Ô»°¿ò
 
 class Sysinfosubvc : public CDialogEx
 {
 	DECLARE_DYNAMIC(Sysinfosubvc)
 
 public:
-	Sysinfosubvc(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	Sysinfosubvc(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~Sysinfosubvc();
 
-	// å¯¹è¯æ¡†æ•°æ®
+	// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFOSUB_VC };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -136,28 +136,28 @@ public:
 
 
 
-// SysinfoDlg å¯¹è¯æ¡†
+// SysinfoDlg ¶Ô»°¿ò
 
 class SysinfoDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(SysinfoDlg)
 
 public:
-	SysinfoDlg(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
+	SysinfoDlg(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
 	virtual ~SysinfoDlg();
 
-// å¯¹è¯æ¡†æ•°æ®
+// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_SYSINFO_DIALOG };
-	//é€‰é¡¹å¡
+	//Ñ¡Ïî¿¨
 	Sysinfosubup sysinfosubup;
 	Sysinfosubif sysinfosubif;
 	Sysinfosubvc sysinfosubvc;
 	Sysinfosubac sysinfosubac;
 	Sysinfosuboc sysinfosuboc;
-	CDialog* pDialog[5];  //ç”¨æ¥ä¿å­˜å¯¹è¯æ¡†å¯¹è±¡æŒ‡é’ˆ
+	CDialog* pDialog[5];  //ÓÃÀ´±£´æ¶Ô»°¿ò¶ÔÏóÖ¸Õë
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
 	virtual BOOL OnInitDialog();
 
@@ -166,7 +166,7 @@ public:
 	CTabCtrl m_sysinfotab;
 
 	int m_CurSelTab;
-	//è¯»å–è¾“å…¥æ–‡ä»¶åè®®çš„æ—¶å€™ä½¿ç”¨ï¼›æ¥è‡ªffmpegæºç 
+	//¶ÁÈ¡ÊäÈëÎÄ¼şĞ­ÒéµÄÊ±ºòÊ¹ÓÃ£»À´×ÔffmpegÔ´Âë
 	typedef struct URLContext {
 		const AVClass *av_class; ///< information for av_log(). Set by url_open().
 		struct URLProtocol *prot;
@@ -195,7 +195,7 @@ public:
 		int flags;
 		int (*url_check)(URLContext *h, int mask);
 	} URLProtocol;
-	//å­˜å‚¨æ”¯æŒæ ¼å¼çš„é“¾è¡¨çš„ç¬¬ä¸€ä¸ªå•å…ƒ
+	//´æ´¢Ö§³Ö¸ñÊ½µÄÁ´±íµÄµÚÒ»¸öµ¥Ôª
 	typedef struct SystemInfo {
 		URLProtocol *first_up;
 		AVInputFormat *first_if;

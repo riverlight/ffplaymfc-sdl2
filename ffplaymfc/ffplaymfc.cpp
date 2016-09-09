@@ -1,15 +1,15 @@
-﻿/* 
+/* 
  * FFplay for MFC
  *
- * 雷霄骅 Lei Xiaohua
+ * ������ Lei Xiaohua
  * leixiaohua1020@126.com
- * 中国传媒大学/数字电视技术
+ * �й���ý��ѧ/���ֵ��Ӽ���
  * Communication University of China / Digital TV Technology
  *
  * http://blog.csdn.net/leixiaohua1020
  * 
- * 本工程将ffmpeg项目中的ffplay播放器（ffplay.c）移植到了VC的环境下。
- * 并且使用MFC做了一套简单的界面。
+ * �����̽�ffmpeg��Ŀ�е�ffplay��������ffplay.c����ֲ����VC�Ļ����¡�
+ * ����ʹ��MFC����һ�׼򵥵Ľ��档
  * This software transplant ffplay to Microsoft VC++ environment. 
  * And use MFC to build a simple Graphical User Interface. 
  */
@@ -32,34 +32,34 @@ BEGIN_MESSAGE_MAP(CffplaymfcApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-// CffplaymfcApp 构造
+// CffplaymfcApp ����
 
 CffplaymfcApp::CffplaymfcApp()
 {
-	// 支持重新启动管理器
+	// ֧����������������
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
 
-	// TODO: 在此处添加构造代码，
-	// 将所有重要的初始化放置在 InitInstance 中
+	// TODO: �ڴ˴����ӹ�����룬
+	// ��������Ҫ�ĳ�ʼ�������� InitInstance ��
 }
 
 
-// 唯一的一个 CffplaymfcApp 对象
+// Ψһ��һ�� CffplaymfcApp ����
 
 CffplaymfcApp theApp;
 
 
-// CffplaymfcApp 初始化
+// CffplaymfcApp ��ʼ��
 
 BOOL CffplaymfcApp::InitInstance()
 {
-	// 如果一个运行在 Windows XP 上的应用程序清单指定要
-	// 使用 ComCtl32.dll 版本 6 或更高版本来启用可视化方式，
-	//则需要 InitCommonControlsEx()。否则，将无法创建窗口。
+	// ���һ�������� Windows XP �ϵ�Ӧ�ó����嵥ָ��Ҫ
+	// ʹ�� ComCtl32.dll �汾 6 ����߰汾�����ÿ��ӻ���ʽ��
+	//����Ҫ InitCommonControlsEx()�����򣬽��޷��������ڡ�
 	INITCOMMONCONTROLSEX InitCtrls;
 	InitCtrls.dwSize = sizeof(InitCtrls);
-	// 将它设置为包括所有要在应用程序中使用的
-	// 公共控件类。
+	// ��������Ϊ��������Ҫ��Ӧ�ó�����ʹ�õ�
+	// �����ؼ��ࡣ
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 
@@ -68,21 +68,21 @@ BOOL CffplaymfcApp::InitInstance()
 
 	AfxEnableControlContainer();
 
-	// 创建 shell 管理器，以防对话框包含
-	// 任何 shell 树视图控件或 shell 列表视图控件。
+	// ���� shell ���������Է��Ի������
+	// �κ� shell ����ͼ�ؼ��� shell �б���ͼ�ؼ���
 	CShellManager *pShellManager = new CShellManager;
 
-	// 标准初始化
-	// 如果未使用这些功能并希望减小
-	// 最终可执行文件的大小，则应移除下列
-	// 不需要的特定初始化例程
-	// 更改用于存储设置的注册表项
-	// TODO: 应适当修改该字符串，
-	// 例如修改为公司或组织名
-	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
+	// ��׼��ʼ��
+	// ���δʹ����Щ���ܲ�ϣ����С
+	// ���տ�ִ���ļ��Ĵ�С����Ӧ�Ƴ�����
+	// ����Ҫ���ض���ʼ������
+	// �������ڴ洢���õ�ע�����
+	// TODO: Ӧ�ʵ��޸ĸ��ַ�����
+	// �����޸�Ϊ��˾����֯��
+	SetRegistryKey(_T("Ӧ�ó��������ɵı���Ӧ�ó���"));
 
 
-	//多国语言设置
+	//�����������
 	//SetThreadUILanguage(MAKELCID(MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), SORT_DEFAULT));
 
 	CffplaymfcDlg dlg;
@@ -90,22 +90,22 @@ BOOL CffplaymfcApp::InitInstance()
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
 	{
-		// TODO: 在此放置处理何时用
-		//  “确定”来关闭对话框的代码
+		// TODO: �ڴ˷��ô�����ʱ��
+		//  ��ȷ�������رնԻ���Ĵ���
 	}
 	else if (nResponse == IDCANCEL)
 	{
-		// TODO: 在此放置处理何时用
-		//  “取消”来关闭对话框的代码
+		// TODO: �ڴ˷��ô�����ʱ��
+		//  ��ȡ�������رնԻ���Ĵ���
 	}
 
-	// 删除上面创建的 shell 管理器。
+	// ɾ�����洴���� shell ��������
 	if (pShellManager != NULL)
 	{
 		delete pShellManager;
 	}
 
-	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
-	//  而不是启动应用程序的消息泵。
+	// ���ڶԻ����ѹرգ����Խ����� FALSE �Ա��˳�Ӧ�ó���
+	//  ����������Ӧ�ó������Ϣ�á�
 	return FALSE;
 }

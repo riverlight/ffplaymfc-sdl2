@@ -1,15 +1,15 @@
-ï»¿/* 
+/* 
  * FFplay for MFC
  *
- * é›·éœ„éª… Lei Xiaohua
+ * À×Ïöæè Lei Xiaohua
  * leixiaohua1020@126.com
- * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
+ * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
  * Communication University of China / Digital TV Technology
  *
  * http://blog.csdn.net/leixiaohua1020
  * 
- * æœ¬å·¥ç¨‹å°†ffmpegé¡¹ç›®ä¸­çš„ffplayæ’­æ”¾å™¨ï¼ˆffplay.cï¼‰ç§»æ¤åˆ°äº†VCçš„ç¯å¢ƒä¸‹ã€‚
- * å¹¶ä¸”ä½¿ç”¨MFCåšäº†ä¸€å¥—ç®€å•çš„ç•Œé¢ã€‚
+ * ±¾¹¤³Ì½«ffmpegÏîÄ¿ÖĞµÄffplay²¥·ÅÆ÷£¨ffplay.c£©ÒÆÖ²µ½ÁËVCµÄ»·¾³ÏÂ¡£
+ * ²¢ÇÒÊ¹ÓÃMFC×öÁËÒ»Ì×¼òµ¥µÄ½çÃæ¡£
  * This software transplant ffplay to Microsoft VC++ environment. 
  * And use MFC to build a simple Graphical User Interface. 
  */
@@ -19,27 +19,27 @@
 #include "SysinfoDlg.h"
 #include "afxwin.h"
 
-// CffplaymfcDlg å¯¹è¯æ¡†
+// CffplaymfcDlg ¶Ô»°¿ò
 class CffplaymfcDlg : public CDialogEx
 {
-// æ„é€ 
+// ¹¹Ôì
 public:
-	CffplaymfcDlg(CWnd* pParent = NULL);	// æ ‡å‡†æ„é€ å‡½æ•°
+	CffplaymfcDlg(CWnd* pParent = NULL);	// ±ê×¼¹¹Ôìº¯Êı
 	virtual ~CffplaymfcDlg();
 
-// å¯¹è¯æ¡†æ•°æ®
+// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_FFPLAYMFC_DIALOG };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Ö§³Ö
 
-// å®ç°
+// ÊµÏÖ
 protected:
 	HICON m_hIcon;
 
 	CWinThread *pThreadPlay;
 
-	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
+	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -75,7 +75,7 @@ public:
 	CString _strCodecVName;
 	CString _strCodecVResolution;
 
-	// æ–‡ä»¶
+	// ÎÄ¼ş
 	CFlvMaker *_pFlvMaker;
 
 	void ResetBtn();

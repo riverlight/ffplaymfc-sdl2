@@ -31,6 +31,7 @@
     <None Include="res\ffplaymfc(en).bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ffplaymfc.h">

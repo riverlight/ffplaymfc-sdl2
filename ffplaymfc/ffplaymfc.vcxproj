@@ -104,6 +104,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
     <None Include="ReadMe.txt" />
     <None Include="res\ffplaymfc(en).bmp" />
     <None Include="res\ffplaymfc.bmp" />
