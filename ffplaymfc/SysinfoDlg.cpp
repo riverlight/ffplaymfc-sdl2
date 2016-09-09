@@ -1,11 +1,11 @@
-/* 
+ï»¿/* 
  *
- * ÊÓÆµÖ®ÑÛ
+ * è§†é¢‘ä¹‹çœ¼
  * Video Eye
  *
- * À×Ïöæè Lei Xiaohua
+ * é›·éœ„éª… Lei Xiaohua
  * leixiaohua1020@126.com
- * ÖÐ¹ú´«Ã½´óÑ§/Êý×ÖµçÊÓ¼¼Êõ
+ * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
  * Communication University of China / Digital TV Technology
  * http://blog.csdn.net/leixiaohua1020
  *
@@ -18,7 +18,7 @@
 #include "afxdialogex.h"
 
 
-// Sysinfosubac ¶Ô»°¿ò
+// Sysinfosubac å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(Sysinfosubac, CDialogEx)
 
@@ -44,7 +44,7 @@ END_MESSAGE_MAP()
 
 
 
-// Sysinfosubif ¶Ô»°¿ò
+// Sysinfosubif å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(Sysinfosubif, CDialogEx)
 
@@ -69,9 +69,9 @@ BEGIN_MESSAGE_MAP(Sysinfosubif, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// Sysinfosubif ÏûÏ¢´¦Àí³ÌÐò
+// Sysinfosubif æ¶ˆæ¯å¤„ç†ç¨‹åº
 
-// Sysinfosuboc ¶Ô»°¿ò
+// Sysinfosuboc å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(Sysinfosuboc, CDialogEx)
 
@@ -96,9 +96,9 @@ BEGIN_MESSAGE_MAP(Sysinfosuboc, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// Sysinfosuboc ÏûÏ¢´¦Àí³ÌÐò
+// Sysinfosuboc æ¶ˆæ¯å¤„ç†ç¨‹åº
 
-// Sysinfosubup ¶Ô»°¿ò
+// Sysinfosubup å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(Sysinfosubup, CDialogEx)
 
@@ -123,10 +123,10 @@ BEGIN_MESSAGE_MAP(Sysinfosubup, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// Sysinfosubup ÏûÏ¢´¦Àí³ÌÐò
+// Sysinfosubup æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
-// Sysinfosubvc ¶Ô»°¿ò
+// Sysinfosubvc å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(Sysinfosubvc, CDialogEx)
 
@@ -151,12 +151,12 @@ BEGIN_MESSAGE_MAP(Sysinfosubvc, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// Sysinfosubvc ÏûÏ¢´¦Àí³ÌÐò
+// Sysinfosubvc æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
 
 
-// SysinfoDlg ¶Ô»°¿ò
+// SysinfoDlg å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(SysinfoDlg, CDialogEx)
 
@@ -182,11 +182,11 @@ BEGIN_MESSAGE_MAP(SysinfoDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// SysinfoDlg ÏûÏ¢´¦Àí³ÌÐò
+// SysinfoDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 BOOL SysinfoDlg::OnInitDialog(){
 	CDialogEx::OnInitDialog();
 
-	//¶à¹úÓïÑÔÖ§³Ö
+	//å¤šå›½è¯­è¨€æ”¯æŒ
 	CString resloader;
 	resloader.LoadString(IDS_SYSINFO);
 	SetWindowText(resloader);
@@ -214,10 +214,10 @@ BOOL SysinfoDlg::OnInitDialog(){
 	resloader.LoadString(IDS_SYSINFO_OC);
 	m_sysinfotab.InsertItem(4,resloader);
 
-	//ÕûÐÐÑ¡Ôñ£»ÓÐ±í¸ñÏß£»±íÍ·£»µ¥»÷¼¤»î
+	//æ•´è¡Œé€‰æ‹©ï¼›æœ‰è¡¨æ ¼çº¿ï¼›è¡¨å¤´ï¼›å•å‡»æ¿€æ´»
 	DWORD dwExStyle=LVS_EX_FULLROWSELECT|LVS_EX_GRIDLINES|LVS_EX_HEADERDRAGDROP|LVS_EX_ONECLICKACTIVATE;
-	//±¨±í·ç¸ñ£»µ¥ÐÐÑ¡Ôñ£»¸ßÁÁÏÔÊ¾Ñ¡ÔñÐÐ
-	//ÊÓÆµ
+	//æŠ¥è¡¨é£Žæ ¼ï¼›å•è¡Œé€‰æ‹©ï¼›é«˜äº®æ˜¾ç¤ºé€‰æ‹©è¡Œ
+	//è§†é¢‘
 	sysinfosubif.m_sysinfoif.ModifyStyle(0,LVS_SINGLESEL|LVS_REPORT|LVS_SHOWSELALWAYS);
 	sysinfosubif.m_sysinfoif.SetExtendedStyle(dwExStyle);
 
@@ -284,7 +284,7 @@ BOOL SysinfoDlg::OnInitDialog(){
 	resloader.LoadString(IDS_SYSINFO_COMMON_PRIVSIZE);
 	sysinfosuboc.m_sysinfooc.InsertColumn(3,resloader,LVCFMT_CENTER,90,0);
 	//--------------------------------------
-	//Éè¶¨ÔÚTabÄÚÏÔÊ¾µÄ·¶Î§
+	//è®¾å®šåœ¨Tabå†…æ˜¾ç¤ºçš„èŒƒå›´
 	CRect rc;
 	m_sysinfotab.GetClientRect(rc);
 	rc.top += 20;
@@ -310,10 +310,10 @@ BOOL SysinfoDlg::OnInitDialog(){
 void SysinfoDlg::GetSysinfo(){
 
 
-//È¡µÃÏµÍ³Ö§³ÖµÄ¸ñÊ½ÐÅÏ¢£¨Ð­Òé£¬·â×°¸ñÊ½£¬±àÂëÆ÷£©
+//å–å¾—ç³»ç»Ÿæ”¯æŒçš„æ ¼å¼ä¿¡æ¯ï¼ˆåè®®ï¼Œå°è£…æ ¼å¼ï¼Œç¼–ç å™¨ï¼‰
 
 	av_register_all();
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	si.first_c=NULL;
 	si.first_if=NULL;
 	si.first_up=NULL;
@@ -328,26 +328,26 @@ void SysinfoDlg::GetSysinfo(){
 #ifdef _UNICODE
 		name.Format(_T("%S"),(*pup)->name);
 #else
-		//´ó%SÔÚunicode¹¤³ÌÏÂ£¬ºóÃæµÄ²ÎÊý×÷Îªansi¿´´ý
+		//å¤§%Såœ¨unicodeå·¥ç¨‹ä¸‹ï¼ŒåŽé¢çš„å‚æ•°ä½œä¸ºansiçœ‹å¾…
 		name.Format(_T("%s"),(*pup)->name);
 #endif
 		priv_data_size.Format(_T("%d"),(*pup)->priv_data_size);
 		f_index.Format(_T("%d"),up_index);
-		//»ñÈ¡µ±Ç°¼ÇÂ¼ÌõÊý
+		//èŽ·å–å½“å‰è®°å½•æ¡æ•°
 		nIndex=sysinfosubup.m_sysinfoup.GetItemCount();
-		//¡°ÐÐ¡±Êý¾Ý½á¹¹
+		//â€œè¡Œâ€æ•°æ®ç»“æž„
 		LV_ITEM lvitem;
 		lvitem.mask=LVIF_TEXT;
 		lvitem.iItem=nIndex;
 		lvitem.iSubItem=0;
-		//×¢£ºvframe_index²»¿ÉÒÔÖ±½Ó¸³Öµ£¡
-		//Îñ±ØÊ¹ÓÃf_indexÖ´ÐÐFormat!ÔÙ¸³Öµ£¡
+		//æ³¨ï¼švframe_indexä¸å¯ä»¥ç›´æŽ¥èµ‹å€¼ï¼
+		//åŠ¡å¿…ä½¿ç”¨f_indexæ‰§è¡ŒFormat!å†èµ‹å€¼ï¼
 		lvitem.pszText=f_index.GetBuffer();
 		//lvitem.pszText=(LPWSTR)(LPCTSTR)f_index;
 		//------------------------
 		sysinfosubup.m_sysinfoup.InsertItem(&lvitem);
 		sysinfosubup.m_sysinfoup.SetItemText(nIndex,1,name);
-		//ÏÂÒ»¸ö
+		//ä¸‹ä¸€ä¸ª
 		avio_enum_protocols((void **)pup,0);
 		up_index++;
 	}
@@ -376,15 +376,15 @@ void SysinfoDlg::GetSysinfo(){
 #endif
 		priv_data_size.Format(_T("%d"),if_temp->priv_data_size);
 		f_index.Format(_T("%d"),if_index);
-		//»ñÈ¡µ±Ç°¼ÇÂ¼ÌõÊý
+		//èŽ·å–å½“å‰è®°å½•æ¡æ•°
 		nIndex=sysinfosubif.m_sysinfoif.GetItemCount();
-		//¡°ÐÐ¡±Êý¾Ý½á¹¹
+		//â€œè¡Œâ€æ•°æ®ç»“æž„
 		LV_ITEM lvitem;
 		lvitem.mask=LVIF_TEXT;
 		lvitem.iItem=nIndex;
 		lvitem.iSubItem=0;
-		//×¢£ºvframe_index²»¿ÉÒÔÖ±½Ó¸³Öµ£¡
-		//Îñ±ØÊ¹ÓÃf_indexÖ´ÐÐFormat!ÔÙ¸³Öµ£¡
+		//æ³¨ï¼švframe_indexä¸å¯ä»¥ç›´æŽ¥èµ‹å€¼ï¼
+		//åŠ¡å¿…ä½¿ç”¨f_indexæ‰§è¡ŒFormat!å†èµ‹å€¼ï¼
 		lvitem.pszText=f_index.GetBuffer();
 		//------------------------
 		sysinfosubif.m_sysinfoif.InsertItem(&lvitem);
@@ -411,7 +411,7 @@ void SysinfoDlg::GetSysinfo(){
 #endif
 		priv_data_size.Format(_T("%d"),c_temp->priv_data_size);
 		f_index.Format(_T("%d"),c_index);
-		//¡°ÐÐ¡±Êý¾Ý½á¹¹
+		//â€œè¡Œâ€æ•°æ®ç»“æž„
 		LV_ITEM lvitem;
 		lvitem.mask=LVIF_TEXT;
 		lvitem.iSubItem=0;
@@ -437,7 +437,7 @@ void SysinfoDlg::GetSysinfo(){
 				}
 			}
 
-			//»ñÈ¡µ±Ç°¼ÇÂ¼ÌõÊý
+			//èŽ·å–å½“å‰è®°å½•æ¡æ•°
 			nIndex=sysinfosubvc.m_sysinfovc.GetItemCount();
 			lvitem.iItem=nIndex;
 
@@ -472,7 +472,7 @@ void SysinfoDlg::GetSysinfo(){
 				}
 			}
 
-			//»ñÈ¡µ±Ç°¼ÇÂ¼ÌõÊý
+			//èŽ·å–å½“å‰è®°å½•æ¡æ•°
 			nIndex=sysinfosubac.m_sysinfoac.GetItemCount();
 			lvitem.iItem=nIndex;
 
@@ -486,7 +486,7 @@ void SysinfoDlg::GetSysinfo(){
 			sysinfosubac.m_sysinfoac.SetItemText(nIndex,5,priv_data_size);
 			break;
 		default:
-			//»ñÈ¡µ±Ç°¼ÇÂ¼ÌõÊý
+			//èŽ·å–å½“å‰è®°å½•æ¡æ•°
 			nIndex=sysinfosuboc.m_sysinfooc.GetItemCount();
 			lvitem.iItem=nIndex;
 
@@ -508,11 +508,11 @@ void SysinfoDlg::GetSysinfo(){
 
 void SysinfoDlg::OnSelchangeSysinfoTab(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	//°Ñµ±Ç°µÄÒ³ÃæÒþ²ØÆðÀ´
+	//æŠŠå½“å‰çš„é¡µé¢éšè—èµ·æ¥
 	pDialog[m_CurSelTab]->ShowWindow(SW_HIDE);
-	//µÃµ½ÐÂµÄÒ³ÃæË÷Òý
+	//å¾—åˆ°æ–°çš„é¡µé¢ç´¢å¼•
 	m_CurSelTab = m_sysinfotab.GetCurSel();
-	//°ÑÐÂµÄÒ³ÃæÏÔÊ¾³öÀ´
+	//æŠŠæ–°çš„é¡µé¢æ˜¾ç¤ºå‡ºæ¥
 	pDialog[m_CurSelTab]->ShowWindow(SW_SHOW);
 	*pResult = 0;
 }

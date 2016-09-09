@@ -1,4 +1,4 @@
-#ifndef FLVMAKER_H
+﻿#ifndef FLVMAKER_H
 #define FLVMAKER_H
 
 #include <fstream>

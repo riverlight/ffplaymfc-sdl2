@@ -1,9 +1,9 @@
-/* 
+ï»¿/* 
  * FFplay for Visual Studio
  *
- * À×Ïöæè Lei Xiaohua
+ * é›·éœ„éª… Lei Xiaohua
  * leixiaohua1020@126.com
- * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+ * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
  * Communication University of China / Digital TV Technology
  * http://blog.csdn.net/leixiaohua1020
  *
@@ -354,10 +354,10 @@ void parse_options(void *optctx, int argc, char **argv, const OptionDef *options
     int optindex, handleoptions = 1, ret;
 
     /* perform system-dependent conversions for arguments list */
-	//²»ĞèÒª
+	//ä¸éœ€è¦
     //prepare_app_arguments(&argc, &argv);
 
-    //½âÎöOption
+    //è§£æOption
     optindex = 1;
     while (optindex < argc) {
         opt = argv[optindex++];

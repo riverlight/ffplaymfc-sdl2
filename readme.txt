@@ -1,13 +1,13 @@
-FFplay for MFC
+ï»¿FFplay for MFC
 
-À×Ïöæè Lei Xiaohua
+é›·éœ„éª… Lei Xiaohua
 leixiaohua1020@126.com
-ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
 Communication University of China / Digital TV Technology
 
 http://blog.csdn.net/leixiaohua1020
 
-±¾¹¤³Ì½«ffmpegÏîÄ¿ÖĞµÄffplay²¥·ÅÆ÷£¨ffplay.c£©ÒÆÖ²µ½ÁËVCµÄ»·¾³ÏÂ¡£
-²¢ÇÒÊ¹ÓÃMFC×öÁËÒ»Ì×¼òµ¥µÄ½çÃæ¡£
+æœ¬å·¥ç¨‹å°†ffmpegé¡¹ç›®ä¸­çš„ffplayæ’­æ”¾å™¨ï¼ˆffplay.cï¼‰ç§»æ¤åˆ°äº†VCçš„ç¯å¢ƒä¸‹ã€‚
+å¹¶ä¸”ä½¿ç”¨MFCåšäº†ä¸€å¥—ç®€å•çš„ç•Œé¢ã€‚
 This software transplant ffplay to Microsoft VC++ environment. 
 And use MFC to build a simple Graphical User Interface. 

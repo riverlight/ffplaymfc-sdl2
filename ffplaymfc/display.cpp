@@ -1,4 +1,4 @@
-#include "stdafx.h"
+О╩©#include "stdafx.h"
 
 #include "displayDef.h"
 #include "display.h"
@@ -48,8 +48,8 @@ int CDisplay::Release()
 
 void CDisplay::GetScreenSize(int *pnWidth, int *pnHeight)
 {
-	*pnWidth = GetSystemMetrics(SM_CXSCREEN);//фад╩©М╤х
-	*pnHeight = GetSystemMetrics(SM_CYSCREEN);//фад╩╦ъ╤х
+	*pnWidth = GetSystemMetrics(SM_CXSCREEN);//Е╠▐Е╧∙Е╝╫Е╨╕
+	*pnHeight = GetSystemMetrics(SM_CYSCREEN);//Е╠▐Е╧∙И╚≤Е╨╕
 
 	return;
 }

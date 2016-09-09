@@ -1,15 +1,15 @@
-/* 
+ï»¿/* 
  * FFplay for MFC
  *
- * À×Ïöæè Lei Xiaohua
+ * é›·éœ„éª… Lei Xiaohua
  * leixiaohua1020@126.com
- * ÖĞ¹ú´«Ã½´óÑ§/Êı×ÖµçÊÓ¼¼Êõ
+ * ä¸­å›½ä¼ åª’å¤§å­¦/æ•°å­—ç”µè§†æŠ€æœ¯
  * Communication University of China / Digital TV Technology
  *
  * http://blog.csdn.net/leixiaohua1020
  * 
- * ±¾¹¤³Ì½«ffmpegÏîÄ¿ÖĞµÄffplay²¥·ÅÆ÷£¨ffplay.c£©ÒÆÖ²µ½ÁËVCµÄ»·¾³ÏÂ¡£
- * ²¢ÇÒÊ¹ÓÃMFC×öÁËÒ»Ì×¼òµ¥µÄ½çÃæ¡£
+ * æœ¬å·¥ç¨‹å°†ffmpegé¡¹ç›®ä¸­çš„ffplayæ’­æ”¾å™¨ï¼ˆffplay.cï¼‰ç§»æ¤åˆ°äº†VCçš„ç¯å¢ƒä¸‹ã€‚
+ * å¹¶ä¸”ä½¿ç”¨MFCåšäº†ä¸€å¥—ç®€å•çš„ç•Œé¢ã€‚
  * This software transplant ffplay to Microsoft VC++ environment. 
  * And use MFC to build a simple Graphical User Interface. 
  */
@@ -25,7 +25,7 @@
 #define new DEBUG_NEW
 #endif
 
-// CffplaymfcDlg ¶Ô»°¿ò
+// CffplaymfcDlg å¯¹è¯æ¡†
 
 
 CffplaymfcDlg::CffplaymfcDlg(CWnd* pParent /*=NULL*/)
@@ -99,15 +99,15 @@ UINT Thread_Play(LPVOID lpParam){
 	return 0;
 }
 
-// CffplaymfcDlg ÏûÏ¢´¦Àí³ÌĞò
+// CffplaymfcDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 BOOL CffplaymfcDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½«¡°¹ØÓÚ...¡±²Ëµ¥ÏîÌí¼Óµ½ÏµÍ³²Ëµ¥ÖĞ¡£
+	// å°†â€œå…³äº...â€èœå•é¡¹æ·»åŠ åˆ°ç³»ç»Ÿèœå•ä¸­ã€‚
 
-	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+	// IDM_ABOUTBOX å¿…é¡»åœ¨ç³»ç»Ÿå‘½ä»¤èŒƒå›´å†…ã€‚
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -127,12 +127,12 @@ BOOL CffplaymfcDlg::OnInitDialog()
 
 
 	//_CrtSetBreakAlloc(4985);
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO: ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 	CreateSubWindow();
 	//
 	//SliderControl
@@ -145,7 +145,7 @@ BOOL CffplaymfcDlg::OnInitDialog()
 
 
 	if(argvPath != NULL){ 
-		//ÉèÖÃÂ·¾¶
+		//è®¾ç½®è·¯å¾„
 		m_inputurl.SetWindowText(argvPath);
 		OnBnClickedStart();
 	}
@@ -154,7 +154,7 @@ BOOL CffplaymfcDlg::OnInitDialog()
 	
 	_pFlvMaker = new CFlvMaker("d://workroom/testroom/ffplay.flv");
 		
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 void CffplaymfcDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -169,19 +169,19 @@ void CffplaymfcDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
-//  À´»æÖÆ¸ÃÍ¼±ê¡£¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
-//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
+//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
+//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
 void CffplaymfcDlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
+		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -189,7 +189,7 @@ void CffplaymfcDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// »æÖÆÍ¼±ê
+		// ç»˜åˆ¶å›¾æ ‡
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
@@ -198,8 +198,8 @@ void CffplaymfcDlg::OnPaint()
 	}
 }
 
-//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
-//ÏÔÊ¾¡£
+//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
+//æ˜¾ç¤ºã€‚
 HCURSOR CffplaymfcDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -238,7 +238,7 @@ void CffplaymfcDlg::OnBnClickedStart()
 		return ;
 	}
 
-	pThreadPlay = AfxBeginThread(Thread_Play,this);//¿ªÆôÏß³Ì
+	pThreadPlay = AfxBeginThread(Thread_Play,this);//å¼€å¯çº¿ç¨‹
 	ActiveBtn();
 }
 
@@ -284,7 +284,7 @@ void CffplaymfcDlg::OnBnClickedFullscreen()
 void CffplaymfcDlg::OnBnClickedInputurlButton()
 {
 	CString FilePathName;
-	//ÎÄ¼ş¹ıÂË×Ö·û´®¡£¹»³¤
+	//æ–‡ä»¶è¿‡æ»¤å­—ç¬¦ä¸²ã€‚å¤Ÿé•¿
 	CString strfilter;
 	strfilter.Append(_T("Common media formats|*.avi;*.wmv;*.wmp;*.wm;*.asf;*.rm;*.ram;*.rmvb;*.ra;*.mpg;*.mpeg;*.mpe;*.m1v;*.m2v;*.mpv2;*.flv;"));
 	strfilter.Append(_T("*.mp2v;*.dat;*.mp4;*.m4v;*.m4p;*.vob;*.ac3;*.dts;*.mov;*.qt;*.mr;*.3gp;*.3gpp;*.3g2;*.3gp2;*.swf;*.ogg;*.wma;*.wav;"));
@@ -305,7 +305,7 @@ void CffplaymfcDlg::OnBnClickedInputurlButton()
 
 
 	LPCTSTR lpszfilter=strfilter;
-	CFileDialog dlg(TRUE,NULL,NULL,NULL,lpszfilter);///TRUEÎªOPEN¶Ô»°¿ò£¬FALSEÎªSAVE AS¶Ô»°¿ò 
+	CFileDialog dlg(TRUE,NULL,NULL,NULL,lpszfilter);///TRUEä¸ºOPENå¯¹è¯æ¡†ï¼ŒFALSEä¸ºSAVE ASå¯¹è¯æ¡† 
 	if(dlg.DoModal()==IDOK) {
 		FilePathName=dlg.GetPathName();
 		m_inputurl.SetWindowText(FilePathName);
@@ -331,11 +331,11 @@ void CffplaymfcDlg::OnDropFiles(HDROP hDropInfo)
 {
 	CDialogEx::OnDropFiles(hDropInfo);
 	LPTSTR pFilePathName =(LPTSTR)malloc(MAX_URL_LENGTH);
-	::DragQueryFile(hDropInfo, 0, pFilePathName,MAX_URL_LENGTH);  // »ñÈ¡ÍÏ·ÅÎÄ¼şµÄÍêÕûÎÄ¼şÃû£¬×î¹Ø¼ü£¡
+	::DragQueryFile(hDropInfo, 0, pFilePathName,MAX_URL_LENGTH);  // è·å–æ‹–æ”¾æ–‡ä»¶çš„å®Œæ•´æ–‡ä»¶åï¼Œæœ€å…³é”®ï¼
 
 	m_inputurl.SetWindowText(pFilePathName);
 
-	::DragFinish(hDropInfo);   // ×¢ÒâÕâ¸ö²»ÄÜÉÙ£¬ËüÓÃÓÚÊÍ·ÅWindows Îª´¦ÀíÎÄ¼şÍÏ·Å¶ø·ÖÅäµÄÄÚ´æ
+	::DragFinish(hDropInfo);   // æ³¨æ„è¿™ä¸ªä¸èƒ½å°‘ï¼Œå®ƒç”¨äºé‡Šæ”¾Windows ä¸ºå¤„ç†æ–‡ä»¶æ‹–æ”¾è€Œåˆ†é…çš„å†…å­˜
 	free(pFilePathName);
 }
 
@@ -468,7 +468,7 @@ void CffplaymfcDlg::OnAspect235100()
 
 void CffplaymfcDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
-	//µ÷Õû²¥·Å½ø¶ÈÌõ
+	//è°ƒæ•´æ’­æ”¾è¿›åº¦æ¡
 	if(nSBCode==SB_THUMBPOSITION){
 		ffmfc_seek_bar(nPos);
 	}
@@ -490,9 +490,9 @@ void CffplaymfcDlg::OnIdcancel()
 	CString resloader;
 	resloader.LoadString(IDS_MSGBOX_EXIT);
 	if(IDOK==AfxMessageBox(resloader,MB_OKCANCEL|MB_ICONINFORMATION)){
-		//ÏÈµãÒ»ÏÂÔİÍ£
+		//å…ˆç‚¹ä¸€ä¸‹æš‚åœ
 		OnBnClickedStop();
-		//ÊÍ·Å×Ó´°¿Ú
+		//é‡Šæ”¾å­çª—å£
 		FreeSubWindow();
 		CDialogEx::OnCancel();
 	}
