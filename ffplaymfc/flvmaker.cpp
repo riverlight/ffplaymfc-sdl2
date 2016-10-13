@@ -8,7 +8,7 @@ static const unsigned int h264StartCode = 0x01000000;
 
 CFlvMaker::CFlvMaker(char *szName)
 {
-	_pH264File = new std::ofstream("d:\\workroom\\testroom\\ffplay.264", std::ios::binary | std::ios::out);
+	_pH264File = new std::ofstream("d:\\workroom\\testroom\\ffplay.h264", std::ios::binary | std::ios::out);
 	_pAACFile = new std::ofstream("d:\\workroom\\testroom\\ffplay.aac", std::ios::binary | std::ios::out);
 
 	_pCnvt = new CConverter();
@@ -86,7 +86,8 @@ int CFlvMaker::WriteVideo(unsigned char *data, int size, int64_t dts)
 	if (n64VideoBaseTimeStamp == NONE_BASETIME)
 		n64VideoBaseTimeStamp = dts;
 
-	nTimeStamp = (dts - n64VideoBaseTimeStamp) * 1000 / 30000;
+	//nTimeStamp = (dts - n64VideoBaseTimeStamp) * 1000 / 30000;
+	nTimeStamp = (dts - n64VideoBaseTimeStamp);
 	while (1)
 	{
 		int nFrameSize = (data[count+0]<<24) + (data[count+1]<<16) + (data[count+2]<<8) + data[count+3];

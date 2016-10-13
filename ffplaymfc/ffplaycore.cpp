@@ -2530,14 +2530,9 @@ static int read_thread(void *arg)
 			dataType = 1;
 		else
 			dataType = 2;
-		TRACE("timestamp : %ld %ld\n", pkt->dts, pkt->pts);
+		TRACE("timestamp : %lld %lld, stream-id : %d\n", pkt->dts, pkt->pts, pkt->stream_index);
 
-		int64_t time;
-		if (dataType == 0)
-			time = (pkt->dts * 1000) / 30000;
-		else
-			time = (pkt->dts * 1000) / is->audio_st->codec->sample_rate;
-		printToFile("%c : %ld ****\n", dataType == 0 ? 'v' : 'a', time);
+		printToFile("%c : %lld ****\n", dataType == 0 ? 'v' : 'a', pkt->dts);
 
 		if (pkt->size!=0)
 			dlg->_pFlvMaker->Write(pkt->data, pkt->size, dataType, pkt->dts);
